@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI・Web販促活用サンプルサイト | 清水 洋介</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --ink: #172033;
+        --muted: #5d6b82;
+        --line: #d9e2ee;
+        --paper: #ffffff;
+        --soft: #f4f7fb;
+        --teal: #0f766e;
+        --blue: #2563eb;
+        --green: #15803d;
+        --amber: #b45309;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: #edf2f7;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN",
+          "Yu Gothic", Meiryo, sans-serif;
+        line-height: 1.65;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .shell {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid rgba(217, 226, 238, 0.9);
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(16px);
+      }
+
+      .nav {
+        display: flex;
+        min-height: 62px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 900;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        place-items: center;
+        border-radius: 8px;
+        background: var(--ink);
+        color: #fff;
+        font-size: 13px;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-end;
+      }
+
+      .nav-links a,
+      .button {
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 7px 11px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .button.primary {
+        border-color: var(--teal);
+        background: var(--teal);
+        color: #fff;
+      }
+
+      .hero {
+        padding: 42px 0 28px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-main,
+      .card,
+      .note,
+      .summary {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--paper);
+        box-shadow: 0 18px 44px rgba(23, 32, 51, 0.07);
+      }
+
+      .hero-main {
+        min-width: 0;
+        padding: clamp(24px, 4vw, 42px);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        margin-bottom: 14px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #e7f7f4;
+        color: var(--teal);
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        max-width: 780px;
+        font-size: clamp(30px, 5vw, 52px);
+        line-height: 1.12;
+        letter-spacing: 0;
+        overflow-wrap: anywhere;
+      }
+
+      .lead {
+        max-width: 840px;
+        margin-top: 16px;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      section {
+        padding: 18px 0;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 14px;
+      }
+
+      .section-head h2 {
+        font-size: 24px;
+      }
+
+      .section-head p {
+        max-width: 680px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .card {
+        overflow: hidden;
+      }
+
+      .preview {
+        height: 230px;
+        overflow: hidden;
+        border-bottom: 1px solid var(--line);
+        background: #eef3f8;
+      }
+
+      .preview img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: left top;
+      }
+
+      .card-body {
+        padding: 18px;
+      }
+
+      .card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .tag {
+        display: inline-flex;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: #eff6ff;
+        color: var(--blue);
+        font-size: 11px;
+        font-weight: 900;
+      }
+
+      .tag.green {
+        background: #ecfdf3;
+        color: var(--green);
+      }
+
+      .tag.amber {
+        background: #fff7ed;
+        color: var(--amber);
+      }
+
+      .tag.teal {
+        background: #e7f7f4;
+        color: var(--teal);
+      }
+
+      .card h3 {
+        margin-top: 10px;
+        font-size: 22px;
+        line-height: 1.25;
+      }
+
+      .card p {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .points {
+        display: grid;
+        gap: 7px;
+        margin: 14px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .points li {
+        position: relative;
+        padding-left: 18px;
+        color: #344054;
+        font-size: 13px;
+      }
+
+      .points li::before {
+        content: "";
+        position: absolute;
+        top: 0.72em;
+        left: 2px;
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--teal);
+      }
+
+      .card-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0;
+        overflow: hidden;
+      }
+
+      .step {
+        min-height: 128px;
+        padding: 18px;
+        border-right: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .step:last-child {
+        border-right: 0;
+      }
+
+      .step span {
+        display: grid;
+        width: 30px;
+        height: 30px;
+        place-items: center;
+        border-radius: 999px;
+        background: var(--ink);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .step strong {
+        display: block;
+        margin-top: 12px;
+        font-size: 16px;
+      }
+
+      .step p {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .note {
+        padding: 22px;
+      }
+
+      .note h2 {
+        font-size: 22px;
+      }
+
+      .note p {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .source-note {
+        margin: 0 0 16px;
+        padding: 16px 18px;
+        border: 1px solid #bbf7d0;
+        border-radius: 8px;
+        background: #f0fdf4;
+        color: #14532d;
+        font-size: 14px;
+      }
+
+      footer {
+        padding: 32px 0 44px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 900px) {
+        .hero-grid,
+        .grid,
+        .summary {
+          grid-template-columns: 1fr;
+        }
+
+        .step {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .step:last-child {
+          border-bottom: 0;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 12px 0;
+        }
+
+        .nav-links {
+          justify-content: flex-start;
+        }
+
+        .preview {
+          height: 190px;
+        }
+
+        h1 {
+          font-size: 28px;
+          word-break: break-all;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="shell nav">
+        <div class="brand">
+          <span class="brand-mark">YS</span>
+          <span>AI・Web販促活用サンプルサイト</span>
+        </div>
+        <nav class="nav-links" aria-label="サンプル一覧">
+          <a href="#demos">サンプル一覧</a>
+          <a href="#flow">整理の流れ</a>
+          <a href="#notes">補足</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="shell hero-grid">
+          <div class="hero-main">
+            <span class="eyebrow">清水 洋介 / AI・Web販促活用サンプル</span>
+            <h1>AIやWebを使って、情報を整理し伝わる形にするサンプルです。</h1>
+            <p class="lead">
+              実務で作った画面や資料をもとに、情報整理、検索、見える化、下書き作成の例として簡素化しました。Webコンテンツ改善や販促施策にも転用できる考え方として見ていただけます。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="demos">
+        <div class="shell">
+          <div class="section-head">
+            <div>
+              <h2>サンプル一覧</h2>
+              <p>各カードから個別画面を開けます。</p>
+            </div>
+          </div>
+          <p class="source-note">
+            実務で作った画面をもとに、社名や数値を差し替えて簡素化しています。情報を整理してWeb上で見やすくする例としてご覧ください。
+          </p>
+
+          <div class="grid">
+            <article class="card">
+              <div class="preview">
+                <img src="demos/admin_standardization/screenshot-desktop.png" alt="情報整理・回答下書きサンプルの画面" />
+              </div>
+              <div class="card-body">
+                <div class="card-top"><span class="tag teal">AI活用</span></div>
+                <h3>情報整理・回答下書きサンプル</h3>
+                <p>社内資料や問い合わせ内容を整理し、回答や確認事項の下書きにする画面です。</p>
+                <ul class="points">
+                  <li>複雑な情報を入力しやすい項目へ分解</li>
+                  <li>資料の探し方や確認観点をそろえる</li>
+                  <li>FAQやWebコンテンツ改善にも転用可能</li>
+                </ul>
+                <div class="card-actions">
+                  <a class="button primary" href="demos/admin_standardization/">開く</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="preview">
+                <img src="demos/price_check/screenshot-desktop.png" alt="商品情報・資料確認サンプルの画面" />
+              </div>
+              <div class="card-body">
+                <div class="card-top"><span class="tag">商品情報</span></div>
+                <h3>商品情報・条件整理サンプル</h3>
+                <p>商品情報や条件を一覧化し、探しやすくした例です。</p>
+                <ul class="points">
+                  <li>商品・仕様・条件を同じ基準で整理</li>
+                  <li>検索や絞り込みで必要情報に到達</li>
+                  <li>カタログサイトや製品ページ改善に応用可能</li>
+                </ul>
+                <div class="card-actions">
+                  <a class="button primary" href="demos/price_check/">開く</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="preview">
+                <img src="demos/sales_support_dashboard/screenshot-desktop.png" alt="営業支援実績ビューの画面" />
+              </div>
+              <div class="card-body">
+                <div class="card-top"><span class="tag green">可視化</span></div>
+                <h3>営業支援・実績可視化サンプル</h3>
+                <p>実績や次アクションを整理し、確認しやすくした画面です。</p>
+                <ul class="points">
+                  <li>取引先別・月別の傾向を可視化</li>
+                  <li>商談前に見る情報を一覧化</li>
+                  <li>展示会後のリード整理にも応用可能</li>
+                </ul>
+                <div class="card-actions">
+                  <a class="button primary" href="demos/sales_support_dashboard/">開く</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="preview">
+                <img src="demos/order_system/screenshot-desktop.png" alt="入力受付システム電子化サンプルの入口画面" />
+              </div>
+              <div class="card-body">
+                <div class="card-top"><span class="tag amber">フォーム設計</span></div>
+                <h3>入力フォーム・管理画面サンプル</h3>
+                <p>問い合わせや依頼受付をフォーム化し、管理画面へつなげる考え方の例です。</p>
+                <ul class="points">
+                  <li>入力フォーム、管理者画面、履歴画面を用意</li>
+                  <li>Googleスプレッドシート連携を想定</li>
+                  <li>問い合わせフォームや展示会後フォローに応用可能</li>
+                </ul>
+                <div class="card-actions">
+                  <a class="button primary" href="demos/order_system/">開く</a>
+                  <a class="button" href="demos/order_system/05_admin.html">管理者</a>
+                  <a class="button" href="demos/order_system/04_index.html">フォーム</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="preview">
+                <img src="demos/foreign_staff_database/screenshot-desktop.png" alt="コンテンツ管理一覧サンプルの入口画面" />
+              </div>
+              <div class="card-body">
+                <div class="card-top"><span class="tag">データ整理</span></div>
+                <h3>一覧・検索UIサンプル</h3>
+                <p>多い情報を一覧化し、検索やステータス確認をしやすくした画面です。</p>
+                <ul class="points">
+                  <li>登録情報や確認期限を一覧で確認</li>
+                  <li>検索、絞り込み、ステータス確認を用意</li>
+                  <li>製品情報やコンテンツ一覧にも応用可能</li>
+                </ul>
+                <div class="card-actions">
+                  <a class="button primary" href="demos/foreign_staff_database/">開く</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="flow">
+        <div class="shell">
+          <div class="section-head">
+            <div>
+              <h2>整理の流れ</h2>
+              <p>どの画面も、まず情報を小さく分けて、Web上で見やすい形に整えることを意識しています。</p>
+            </div>
+          </div>
+          <div class="summary">
+            <div class="step">
+              <span>1</span>
+              <strong>分解</strong>
+              <p>情報を目的や対象者ごとに分ける。</p>
+            </div>
+            <div class="step">
+              <span>2</span>
+              <strong>整理</strong>
+              <p>必要な項目や表示順をそろえる。</p>
+            </div>
+            <div class="step">
+              <span>3</span>
+              <strong>可視化</strong>
+              <p>一覧や検索で見つけやすくする。</p>
+            </div>
+            <div class="step">
+              <span>4</span>
+              <strong>下書き</strong>
+              <p>AIも使いながら文章や回答案を作る。</p>
+            </div>
+            <div class="step">
+              <span>5</span>
+              <strong>転用</strong>
+              <p>Webページや販促資料へ展開する。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="notes">
+        <div class="shell">
+          <div class="note">
+            <h2>補足</h2>
+            <p>
+              画面内の社名、施設名、氏名、条件、数値などは応募補足用に置き換えています。実顧客情報、現職の機密情報は含めていません。
+            </p>
+            <p>
+              AIや簡易ツールで完結させるのではなく、人が確認しながらWeb施策や販促改善に活かす前提です。
+            </p>
+            <p>
+              入社後すぐに大きな開発を行うという意味ではありません。商品知識や既存サイト、カタログ、営業資料を学びながら、転用できる機会があれば準備していきたいと考えています。
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell">清水 洋介 / Business Improvement Sample Site</div>
+    </footer>
+  </body>
+</html>

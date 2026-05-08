@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>入力受付システム電子化サンプル | 業務改善・Web販促サンプルサイト</title>
+    <style>
+      * { box-sizing: border-box; }
+      :root {
+        --ink:#172033;
+        --muted:#5d6b82;
+        --line:#d9e2ee;
+        --paper:#fff;
+        --soft:#f4f7fb;
+        --teal:#0f766e;
+        --blue:#2563eb;
+        --amber:#b45309;
+      }
+      body {
+        margin:0;
+        color:var(--ink);
+        background:#edf2f7;
+        font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+        line-height:1.65;
+      }
+      .shell { width:min(1120px,calc(100% - 32px)); margin:0 auto; }
+      header {
+        border-bottom:1px solid rgba(217,226,238,.9);
+        background:rgba(255,255,255,.9);
+        backdrop-filter:blur(16px);
+      }
+      .nav {
+        display:flex;
+        min-height:62px;
+        align-items:center;
+        justify-content:space-between;
+        gap:16px;
+      }
+      .brand {
+        display:flex;
+        align-items:center;
+        gap:10px;
+        font-weight:900;
+      }
+      .mark {
+        display:grid;
+        width:34px;
+        height:34px;
+        place-items:center;
+        border-radius:8px;
+        background:var(--ink);
+        color:#fff;
+        font-size:13px;
+      }
+      a { color:inherit; }
+      .button {
+        display:inline-flex;
+        align-items:center;
+        min-height:38px;
+        padding:8px 12px;
+        border:1px solid var(--line);
+        border-radius:8px;
+        background:#fff;
+        color:var(--muted);
+        font-size:13px;
+        font-weight:900;
+        text-decoration:none;
+      }
+      .button.primary { border-color:var(--teal); background:var(--teal); color:#fff; }
+      main { padding:36px 0 52px; }
+      .hero,
+      .panel,
+      .card {
+        border:1px solid var(--line);
+        border-radius:8px;
+        background:var(--paper);
+        box-shadow:0 18px 44px rgba(23,32,51,.07);
+      }
+      .hero {
+        display:grid;
+        grid-template-columns:minmax(0,1fr) 310px;
+        gap:22px;
+        padding:clamp(24px,4vw,40px);
+      }
+      .eyebrow {
+        display:inline-flex;
+        margin-bottom:14px;
+        padding:6px 10px;
+        border-radius:999px;
+        background:#fff7ed;
+        color:var(--amber);
+        font-size:12px;
+        font-weight:900;
+      }
+      h1,h2,h3,p { margin:0; }
+      h1 {
+        max-width:760px;
+        font-size:clamp(30px,5vw,48px);
+        line-height:1.14;
+        letter-spacing:0;
+      }
+      .lead {
+        max-width:790px;
+        margin-top:16px;
+        color:var(--muted);
+        font-size:15px;
+      }
+      .hero-actions {
+        display:flex;
+        flex-wrap:wrap;
+        gap:10px;
+        margin-top:22px;
+      }
+      .side {
+        display:grid;
+        gap:12px;
+      }
+      .metric {
+        padding:16px;
+        border-radius:8px;
+        background:var(--soft);
+      }
+      .metric strong { display:block; font-size:24px; line-height:1.2; }
+      .metric span { color:var(--muted); font-size:12px; font-weight:800; }
+      .grid {
+        display:grid;
+        grid-template-columns:repeat(3,minmax(0,1fr));
+        gap:14px;
+        margin-top:18px;
+      }
+      .card { padding:18px; }
+      .tag {
+        display:inline-flex;
+        padding:4px 8px;
+        border-radius:999px;
+        background:#e7f7f4;
+        color:var(--teal);
+        font-size:11px;
+        font-weight:900;
+      }
+      .card h2 { margin-top:10px; font-size:22px; line-height:1.25; }
+      .card p { margin-top:8px; color:var(--muted); font-size:14px; }
+      .card .button { margin-top:14px; }
+      .panel {
+        margin-top:18px;
+        padding:22px;
+      }
+      .panel h2 { font-size:22px; }
+      .panel ul {
+        display:grid;
+        gap:8px;
+        margin:12px 0 0;
+        padding-left:18px;
+        color:#344054;
+        font-size:14px;
+      }
+      .note {
+        margin-top:14px;
+        color:var(--muted);
+        font-size:13px;
+      }
+      @media (max-width: 880px) {
+        .hero,.grid { grid-template-columns:1fr; }
+        .nav { align-items:flex-start; flex-direction:column; padding:12px 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="shell nav">
+        <div class="brand"><span class="mark">YS</span><span>業務改善・Web販促サンプルサイト</span></div>
+        <a class="button" href="../../">総合トップへ戻る</a>
+      </div>
+    </header>
+    <main>
+      <div class="shell">
+        <section class="hero">
+          <div>
+            <span class="eyebrow">入力受付 / 小さく試す検証</span>
+            <h1>入力受付業務を、入力・管理・履歴に分けた画面です。</h1>
+            <p class="lead">
+              実務で作った入力受付画面を、応募補足用に簡素化しました。Googleスプレッドシート連携で小さく試し、運用確認後に本実装へ引き継ぐ想定です。
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="05_admin.html">管理者画面を開く</a>
+              <a class="button" href="04_index.html">入力フォームを開く</a>
+              <a class="button" href="06_history.html">依頼履歴を開く</a>
+            </div>
+          </div>
+          <aside class="side">
+            <div class="metric"><strong>3画面</strong><span>入力・管理・履歴</span></div>
+            <div class="metric"><strong>小さく検証</strong><span>Googleスプレッドシート活用を想定</span></div>
+            <div class="metric"><strong>検証後</strong><span>社内システム組み込みへ引き継ぎ</span></div>
+          </aside>
+        </section>
+
+        <section class="grid" aria-label="画面一覧">
+          <article class="card">
+            <span class="tag">ADMIN</span>
+            <h2>管理者画面</h2>
+            <p>依頼一覧、チーム決定、編集、マスタ管理を確認する画面です。</p>
+            <a class="button primary" href="05_admin.html">開く</a>
+          </article>
+          <article class="card">
+            <span class="tag">ORDER</span>
+            <h2>入力フォーム</h2>
+            <p>取引先や社内担当者が依頼内容を登録する入力画面です。</p>
+            <a class="button primary" href="04_index.html">開く</a>
+          </article>
+          <article class="card">
+            <span class="tag">HISTORY</span>
+            <h2>依頼履歴</h2>
+            <p>過去依頼、書類リンク、ステータスを確認する画面です。</p>
+            <a class="button primary" href="06_history.html">開く</a>
+          </article>
+        </section>
+
+        <section class="panel">
+          <h2>このサンプルで示すこと</h2>
+          <ul>
+            <li>既存の紙・Excel・Googleスプレッドシート運用を否定せず、まず小さく試せる形にすること。</li>
+            <li>入力受付、管理者確認、履歴参照を分け、関係者ごとの操作画面を整理すること。</li>
+            <li>テスト運用で業務ルールを固めたうえで、社内システムへ組み込める状態に引き継ぐこと。</li>
+          </ul>
+          <p class="note">サンプルデータはブラウザ内に保存されます。実顧客情報・実条件・機密情報は含めていません。</p>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
