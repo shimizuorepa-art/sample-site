@@ -4,7 +4,7 @@
 <base target="_top">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>サンプル入力受付ポータル 管理者画面</title>
+<title>サンプル受発注ポータル 管理者画面</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap');
 * { box-sizing: border-box; }
@@ -433,8 +433,8 @@ tr:hover {
   <header class="admin-hero">
     <div>
       <div class="eyebrow">Operations Cockpit</div>
-      <h1>サンプル入力受付ポータル 管理者画面</h1>
-      <p class="hero-copy">依頼、PDF、確認書、コストと効果をひとつの画面で追える社内オペレーション画面です。</p>
+      <h1>サンプル受発注ポータル 管理者画面</h1>
+      <p class="hero-copy">注文、PDF、納品書、原価と利益をひとつの画面で追える社内オペレーション画面です。</p>
     </div>
     <div class="hero-badge">
       <strong>2026</strong>
@@ -452,19 +452,19 @@ tr:hover {
   <div id="app" class="hidden">
     <!-- タブ -->
     <div class="tabs">
-      <div class="tab active" data-tab="orders" onclick="switchTab('orders')">📋 依頼管理</div>
-      <div class="tab" data-tab="masters" onclick="switchTab('masters')">💰 条件・コストマスタ</div>
+      <div class="tab active" data-tab="orders" onclick="switchTab('orders')">📋 注文管理</div>
+      <div class="tab" data-tab="masters" onclick="switchTab('masters')">💰 単価・原価マスタ</div>
     </div>
 
-    <!-- 依頼管理タブ -->
+    <!-- 注文管理タブ -->
     <div id="tab_orders">
       <div class="card">
         <div class="stat">
           <div>件数<b id="stCount">0</b></div>
-          <div>成果(税込)<b id="stSales">¥0</b></div>
-          <div>コスト<b id="stCost">¥0</b></div>
-          <div>効果(税込)<b id="stProfit">¥0</b></div>
-          <div style="background:#fff3e0; color:#e65100;">チーム未決定<b id="stNoBase" style="color:#bf360c;">0</b></div>
+          <div>売上(税込)<b id="stSales">¥0</b></div>
+          <div>原価<b id="stCost">¥0</b></div>
+          <div>利益(税込)<b id="stProfit">¥0</b></div>
+          <div style="background:#fff3e0; color:#e65100;">拠点未決定<b id="stNoBase" style="color:#bf360c;">0</b></div>
         </div>
       </div>
 
@@ -473,11 +473,11 @@ tr:hover {
           <input type="text" id="fSearch" placeholder="🔍 件名・御社名で検索" oninput="render()" style="flex:1; min-width:200px">
           <select id="fCrop" onchange="render()"><option value="">全商品</option></select>
           <select id="fBase" onchange="render()">
-            <option value="">全チーム</option>
-            <option value="__nobase__">🔸 チーム未決定のみ</option>
+            <option value="">全拠点</option>
+            <option value="__nobase__">🔸 拠点未決定のみ</option>
           </select>
           <select id="fDelivery" onchange="render()">
-            <option value="">全確認書状態</option>
+            <option value="">全納品書状態</option>
             <option value="unsent">未送信</option>
             <option value="sent">送信済</option>
           </select>
@@ -493,9 +493,9 @@ tr:hover {
         <table id="tbl">
           <thead>
             <tr>
-              <th>実施日</th><th>件名</th><th>御社名</th><th>チーム</th>
-              <th>商品</th><th>セット数</th><th>成果</th><th>コスト</th><th>コスト率</th>
-              <th>依頼書</th><th>確認書</th><th>操作</th>
+              <th>実施日</th><th>件名</th><th>御社名</th><th>拠点</th>
+              <th>商品</th><th>セット数</th><th>売上</th><th>原価</th><th>原価率</th>
+              <th>注文書</th><th>納品書</th><th>操作</th>
             </tr>
           </thead>
           <tbody id="tbody"></tbody>
@@ -506,40 +506,40 @@ tr:hover {
     <!-- マスタタブ -->
     <div id="tab_masters" class="hidden">
       <div class="card">
-        <div class="section-title">💰 条件マスタ（取引先にも表示される）</div>
+        <div class="section-title">💰 単価マスタ（取引先にも表示される）</div>
         <div style="font-size:12px; color:#777; margin-bottom:10px;">
-          商品ごとの1セットあたり条件（税込）。Webフォームで商品を選ぶと自動表示される値です。
+          商品ごとの1セットあたり単価（税込）。Webフォームで商品を選ぶと自動表示される値です。
         </div>
         <table id="priceTable">
-          <thead><tr><th>商品</th><th>条件(税込/セット)</th><th>備考</th><th>操作</th></tr></thead>
+          <thead><tr><th>商品</th><th>単価(税込/セット)</th><th>備考</th><th>操作</th></tr></thead>
           <tbody id="priceBody"></tbody>
         </table>
         <button onclick="addPriceRow()" class="secondary sm">➕ 行を追加</button>
-        <button onclick="savePriceMaster()" class="success">💾 条件マスタを保存</button>
+        <button onclick="savePriceMaster()" class="success">💾 単価マスタを保存</button>
         <span id="priceMsg" class="ok"></span>
       </div>
 
       <div class="card">
-        <div class="section-title" style="color:#c62828;">🔒 コストマスタ（社内のみ・取引先には非表示）</div>
+        <div class="section-title" style="color:#c62828;">🔒 原価マスタ（社内のみ・取引先には非表示）</div>
         <div style="font-size:12px; color:#777; margin-bottom:10px;">
-          商品ごとの1明細あたりコスト。確認書・総表・効果計算に使われます。取引先のWebフォームには表示されません。
+          商品ごとの1明細あたり原価。納品書・総表・利益計算に使われます。取引先のWebフォームには表示されません。
         </div>
         <table id="costTable">
-          <thead><tr><th>商品</th><th>コスト(円/明細)</th><th>備考</th><th>操作</th></tr></thead>
+          <thead><tr><th>商品</th><th>原価(円/明細)</th><th>備考</th><th>操作</th></tr></thead>
           <tbody id="costBody"></tbody>
         </table>
         <button onclick="addCostRow()" class="secondary sm">➕ 行を追加</button>
-        <button onclick="saveCostMaster()" class="success">💾 コストマスタを保存</button>
+        <button onclick="saveCostMaster()" class="success">💾 原価マスタを保存</button>
         <span id="costMsg" class="ok"></span>
       </div>
 
       <div class="card">
         <div class="section-title">♻️ マスタ変更後の再計算</div>
         <div style="font-size:13px; color:#555; margin-bottom:10px;">
-          条件またはコストを変更した場合、既存の全依頼の金額・コストを最新マスタで再計算できます。<br>
-          <b style="color:#c62828;">※ 過去の依頼も一括で上書きされます。通常は新規依頼のみに反映されます。</b>
+          単価または原価を変更した場合、既存の全注文の金額・原価を最新マスタで再計算できます。<br>
+          <b style="color:#c62828;">※ 過去の注文も一括で上書きされます。通常は新規注文のみに反映されます。</b>
         </div>
-        <button onclick="recalcAll()" class="warn">♻️ 全依頼を再計算する</button>
+        <button onclick="recalcAll()" class="warn">♻️ 全注文を再計算する</button>
         <span id="recalcMsg" class="ok"></span>
       </div>
     </div>
@@ -550,11 +550,11 @@ tr:hover {
     <div class="modal">
       <h2 id="modalTitle">編集</h2>
 
-      <!-- チーム決定セクション（チーム未決定時のみ表示） -->
+      <!-- 拠点決定セクション（拠点未決定時のみ表示） -->
       <div id="basePicker" class="base-picker hidden">
-        <h3>🚨 対応チームが未決定です</h3>
+        <h3>🚨 対応拠点が未決定です</h3>
         <div style="font-size:13px; color:#333; margin-bottom:12px;">
-          どのチームで対応するか決定してください：
+          どの拠点で対応するか決定してください：
         </div>
         <div id="baseBtns"></div>
         <div style="margin-top:10px;">
@@ -565,22 +565,22 @@ tr:hover {
 
       <div class="row2">
         <div><label>御社名（入力者）</label><input type="text" id="e_submittedBy"></div>
-        <div><label>施設名</label><input type="text" id="e_clientName"></div>
+        <div><label>場所名</label><input type="text" id="e_clientName"></div>
         <div><label>住所</label><input type="text" id="e_address"></div>
-        <div><label>対応チーム</label><select id="e_base"></select></div>
+        <div><label>対応拠点</label><select id="e_base"></select></div>
         <div><label>販売先（自動）</label><input type="text" id="e_client" readonly style="background:#f5f5f5;"></div>
         <div><label>商品</label><select id="e_crop" onchange="onCropChange()"></select></div>
         <div><label>形式</label>
           <select id="e_style">
-            <option>レンタル</option><option>公開</option><option>イベント</option>
+            <option>レンタル</option><option>納品</option><option>イベント</option>
           </select>
         </div>
         <div><label>セット数</label><input type="number" id="e_qty" oninput="recalcModal()"></div>
         <div><label>明細数</label><input type="number" id="e_pieces" oninput="recalcModal()"></div>
-        <div><label>条件(税込)【マスタ自動】</label><input type="number" id="e_unitPrice" readonly style="background:#f5f5f5;"></div>
-        <div><label>コスト条件【マスタ自動】</label><input type="number" id="e_unitCost" readonly style="background:#f5f5f5;"></div>
+        <div><label>単価(税込)【マスタ自動】</label><input type="number" id="e_unitPrice" readonly style="background:#f5f5f5;"></div>
+        <div><label>原価単価【マスタ自動】</label><input type="number" id="e_unitCost" readonly style="background:#f5f5f5;"></div>
         <div><label>金額(税込)</label><input type="number" id="e_amount" readonly style="background:#f5f5f5;"></div>
-        <div><label>コスト</label><input type="number" id="e_cost" readonly style="background:#f5f5f5;"></div>
+        <div><label>原価</label><input type="number" id="e_cost" readonly style="background:#f5f5f5;"></div>
         <div><label>実施日</label><input type="date" id="e_eventDate"></div>
         <div><label>積込日</label><input type="date" id="e_loadDate"></div>
         <div><label>返却日</label><input type="date" id="e_returnDate"></div>
@@ -588,13 +588,13 @@ tr:hover {
         <div><label>荷下ろし時間</label><input type="time" id="e_unloadTime"></div>
         <div><label>積込場所</label><input type="text" id="e_loadPlace"></div>
         <div><label>荷下ろし場所</label><input type="text" id="e_unloadPlace"></div>
-        <div><label>連携担当</label><select id="e_carrier"></select></div>
+        <div><label>配送担当</label><select id="e_carrier"></select></div>
         <div><label>車種</label><select id="e_car"></select></div>
         <div><label>社内担当</label><select id="e_staff"></select></div>
         <div><label>レント手配</label><input type="text" id="e_rentHandler"></div>
-        <div><label>依頼書URL</label><input type="text" id="e_orderFileUrl"></div>
+        <div><label>注文書URL</label><input type="text" id="e_orderFileUrl"></div>
         <div><label>ステータス</label>
-          <select id="e_status"><option>有効</option><option>チーム未決定</option><option>キャンセル</option></select>
+          <select id="e_status"><option>有効</option><option>拠点未決定</option><option>キャンセル</option></select>
         </div>
       </div>
       <label>備考</label>
@@ -609,10 +609,10 @@ tr:hover {
     </div>
   </div>
 
-  <!-- 確認書送信モーダル -->
+  <!-- 納品書送信モーダル -->
   <div id="delModal" class="modal-bg hidden" onclick="if(event.target===this)closeDelModal()">
     <div class="modal">
-      <h2>📄 確認書 経費入力 & 送信</h2>
+      <h2>📄 納品書 経費入力 & 送信</h2>
       <div id="delInfo" style="margin-bottom:12px; background:#e3f2fd; padding:10px; border-radius:6px; font-size:13px;"></div>
 
       <div class="exp-panel">
@@ -627,8 +627,8 @@ tr:hover {
       </div>
 
       <div class="total-panel">
-        依頼金額: <b id="delAmount">¥0</b> / 諸経費合計: <b id="delExpTotal">¥0</b><br>
-        <span style="font-size:16px;">合計確認額: </span><b id="delGrand">¥0</b>
+        注文金額: <b id="delAmount">¥0</b> / 諸経費合計: <b id="delExpTotal">¥0</b><br>
+        <span style="font-size:16px;">合計請求額: </span><b id="delGrand">¥0</b>
       </div>
 
       <div style="margin-top:16px;">
@@ -639,14 +639,14 @@ tr:hover {
         <label>件名</label>
         <input type="text" id="delSubject">
         <label>本文（空なら自動生成文を使用）</label>
-        <textarea id="delBody" rows="6" placeholder="空のままにすると、依頼情報から自動生成された標準文面が使われます"></textarea>
+        <textarea id="delBody" rows="6" placeholder="空のままにすると、注文情報から自動生成された標準文面が使われます"></textarea>
       </div>
 
       <div id="delMsg" class="ok"></div>
       <div id="delErr" class="err"></div>
       <div style="margin-top:12px;">
         <button onclick="saveExpOnly()" class="warn">💾 経費のみ保存</button>
-        <button onclick="sendDelivery()" class="success">📧 経費保存+確認書送信</button>
+        <button onclick="sendDelivery()" class="success">📧 経費保存+納品書送信</button>
         <button onclick="closeDelModal()" class="secondary">キャンセル</button>
       </div>
     </div>
@@ -748,7 +748,7 @@ function showDataStatus(res){
   const el = document.getElementById('dataStatus');
   if (!el) return;
   if (res && res.loading) {
-    el.textContent = '診断: 依頼DBを読み込み中...';
+    el.textContent = '診断: 注文DBを読み込み中...';
     return;
   }
   if (res && res.error) {
@@ -764,13 +764,13 @@ function showDataStatus(res){
     return;
   }
   const ss = meta.spreadsheet || {};
-  const order = meta['依頼DB'];
+  const order = meta['注文DB'];
   const daily = meta['日計DB'];
   const summary = meta['総表'];
   el.textContent =
     '版: ' + (meta.appVersion || '不明') +
     '　接続先: ' + (ss.name || '') + ' / ' + (ss.id || '') +
-    '　診断: 依頼DB=' + (order && order.exists ? order.lastRow + '行' : 'なし') +
+    '　診断: 注文DB=' + (order && order.exists ? order.lastRow + '行' : 'なし') +
     ' / 日計DB=' + (daily && daily.exists ? daily.lastRow + '行' : 'なし') +
     ' / 総表=' + (summary && summary.exists ? summary.lastRow + '行' : 'なし');
 }
@@ -832,13 +832,13 @@ function render(){
       <td>${delTag}</td>
       <td>
         <button onclick="openEdit('${o.id}')" class="sm">編集</button>
-        ${o.base ? `<button onclick="openDelivery('${o.id}')" class="success sm">確認書</button>` : ''}
+        ${o.base ? `<button onclick="openDelivery('${o.id}')" class="success sm">納品書</button>` : ''}
       </td>
     `;
     tb.appendChild(tr);
   });
   if (!filtered.length) {
-    tb.innerHTML = '<tr><td colspan="12" style="padding:18px; text-align:center; color:#666;">依頼がありません。フィルタ条件も確認してください。</td></tr>';
+    tb.innerHTML = '<tr><td colspan="12" style="padding:18px; text-align:center; color:#666;">注文がありません。フィルタ条件も確認してください。</td></tr>';
   }
 }
 function esc(s){ return (s==null?'':String(s)).replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c])); }
@@ -865,7 +865,7 @@ function openEdit(id){
   currentId = id;
   currentOrder = o;
   document.getElementById('modalTitle').textContent = '編集: '+id +
-    (!o.base ? ' 🔸チーム未決定' : '');
+    (!o.base ? ' 🔸拠点未決定' : '');
 
   ['submittedBy','clientName','address','client','base','crop','style',
    'qty','pieces','unitPrice','unitCost','amount','cost',
@@ -876,19 +876,19 @@ function openEdit(id){
     if (el) el.value = o[k] ?? '';
   });
 
-  // チーム未決定ならチーム決定UIを表示
+  // 拠点未決定なら拠点決定UIを表示
   const picker = document.getElementById('basePicker');
   const btns = document.getElementById('baseBtns');
   btns.innerHTML = '';
   const needsBaseDecision = !String(o.base || '').trim()
     || !String(o.client || '').trim()
-    || o.status === 'チーム未決定';
+    || o.status === '拠点未決定';
   if (needsBaseDecision) {
     picker.classList.remove('hidden');
     (MASTERS.bases||[]).forEach(b=>{
       const btn = document.createElement('button');
       btn.className = 'base-btn';
-      btn.textContent = '🌾 ' + b + ' から対応';
+      btn.textContent = '🌾 ' + b + ' から出荷';
       btn.onclick = ()=>quickAssignBase(b);
       btns.appendChild(btn);
     });
@@ -903,12 +903,12 @@ function openEdit(id){
 
 function quickAssignBase(base){
   const clientType = document.getElementById('pickerClientType').value || 'サンプル会社A';
-  if (!confirm(base + 'チームから対応することを確定しますか？\n販売先：' + base + '_' + clientType)) return;
-  document.getElementById('modalMsg').textContent = 'チームを確定中...';
+  if (!confirm(base + '拠点から出荷することを確定しますか？\n販売先：' + base + '_' + clientType)) return;
+  document.getElementById('modalMsg').textContent = '拠点を確定中...';
   google.script.run
     .withSuccessHandler(res=>{
       if (!res.ok) { document.getElementById('modalErr').textContent = res.error; return; }
-      document.getElementById('modalMsg').textContent = '✅ チーム確定しました';
+      document.getElementById('modalMsg').textContent = '✅ 拠点確定しました';
       reload();
       setTimeout(()=>{
         closeModal();
@@ -945,7 +945,7 @@ function recalcModal(){
     document.getElementById('e_client').value = base + '_サンプル会社A';
   }
 }
-// チーム変更時も販売先再計算
+// 拠点変更時も販売先再計算
 document.addEventListener('change', e=>{
   if (e.target && e.target.id==='e_base') recalcModal();
 });
@@ -972,7 +972,7 @@ function saveEdit(){
 }
 
 function deleteCurrent(){
-  if (!confirm('この依頼を削除します。よろしいですか？')) return;
+  if (!confirm('この注文を削除します。よろしいですか？')) return;
   google.script.run
     .withSuccessHandler(res=>{
       if (!res.ok) { alert(res.error); return; }
@@ -982,16 +982,16 @@ function deleteCurrent(){
     .deleteOrder(PW, currentId);
 }
 
-// ===== 確認書モーダル =====
+// ===== 納品書モーダル =====
 function openDelivery(id){
   const o = ORDERS.find(x=>x.id===id);
   if (!o) return;
-  if (!o.base) { alert('先に対応チームを決定してください'); return; }
+  if (!o.base) { alert('先に対応拠点を決定してください'); return; }
   currentId = id;
   currentOrder = o;
 
   document.getElementById('delInfo').innerHTML = `
-    <b>${esc(o.clientName)}</b> / ${esc(o.base)}チーム / ${o.eventDate}<br>
+    <b>${esc(o.clientName)}</b> / ${esc(o.base)}拠点 / ${o.eventDate}<br>
     ${esc(o.crop)} ${o.qty}セット×${Number(o.unitPrice||0).toLocaleString()}円 = ¥${(Number(o.amount)||0).toLocaleString()}
   `;
 
@@ -1018,7 +1018,7 @@ function openDelivery(id){
     .getPartnerEmail(PW, o.submittedBy);
 
   document.getElementById('delSubject').value =
-    '【確認書】' + o.eventDate + ' ' + (o.clientName||'');
+    '【納品書】' + o.eventDate + ' ' + (o.clientName||'');
   document.getElementById('delBody').value = '';
   document.getElementById('delMsg').textContent = '';
   document.getElementById('delErr').textContent = '';
@@ -1070,7 +1070,7 @@ function saveExpOnly(){
 function sendDelivery(){
   const to = document.getElementById('delTo').value.trim();
   if (!to) { document.getElementById('delErr').textContent = '送信先を入力してください'; return; }
-  if (!confirm(to + ' 宛に確認書を送信します。よろしいですか？')) return;
+  if (!confirm(to + ' 宛に納品書を送信します。よろしいですか？')) return;
 
   document.getElementById('delMsg').textContent = '送信中...（10〜20秒）';
   document.getElementById('delErr').textContent = '';
@@ -1191,7 +1191,7 @@ function saveCostMaster(){
 }
 
 function recalcAll(){
-  if (!confirm('全依頼の金額・コストを、現在のマスタ値で再計算します。\n過去の依頼も上書きされます。よろしいですか？')) return;
+  if (!confirm('全注文の金額・原価を、現在のマスタ値で再計算します。\n過去の注文も上書きされます。よろしいですか？')) return;
   document.getElementById('recalcMsg').textContent = '再計算中...（数秒〜数十秒）';
   google.script.run
     .withSuccessHandler(res=>{
@@ -1204,7 +1204,7 @@ function recalcAll(){
 }
 
 function exportCsv(){
-  const rows = [['実施日','件名','御社名','チーム','商品','形式','セット数','明細数','条件','成果','コスト','コスト率','確認書送信日','備考']];
+  const rows = [['実施日','件名','御社名','拠点','商品','形式','セット数','明細数','単価','売上','原価','原価率','納品書送信日','備考']];
   ORDERS.forEach(o=>{
     if (o.status==='キャンセル') return;
     rows.push([o.eventDate,o.clientName,o.submittedBy,o.base,o.crop,o.style,

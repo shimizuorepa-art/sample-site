@@ -369,18 +369,18 @@ body{font-family:'Noto Sans JP',system-ui,-apple-system,sans-serif;background:#F
         <span class="nav-label">ワークフロー</span>
       </div>
 
-      <!-- 一覧 -->
+      <!-- 台帳 -->
       <div class="nav-section-title">データ</div>
       <div class="nav-menu open" id="menu-ledger">
         <div class="nav-menu-header" onclick="toggleMenu('menu-ledger')">
           <span class="material-icons-outlined">menu_book</span>
-          <span class="nav-label">一覧</span>
+          <span class="nav-label">台帳</span>
           <span class="material-icons-outlined nav-menu-arrow">expand_more</span>
         </div>
         <div class="nav-children">
           <div class="nav-item" data-page="ledger" onclick="navTo(this)">
             <span class="material-icons-outlined">badge</span>
-            <span class="nav-label">📒 一覧</span>
+            <span class="nav-label">📒 台帳</span>
           </div>
           <div class="nav-item" data-page="schedule" onclick="navTo(this)">
             <span class="material-icons-outlined">event</span>
@@ -461,7 +461,7 @@ body{font-family:'Noto Sans JP',system-ui,-apple-system,sans-serif;background:#F
         <div class="page-header">
           <div class="page-title-area">
             <div class="page-icon"><span class="material-icons-outlined">badge</span></div>
-            <h1 class="page-title">📒 一覧</h1>
+            <h1 class="page-title">📒 台帳</h1>
             <span class="page-count" id="totalCount">（12件）</span>
           </div>
           <button class="btn-create" onclick="alert('サンプル画面：新規作成は無効です')">
@@ -699,7 +699,7 @@ function navTo(el) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   el.classList.add('active');
   if (el.dataset.page !== 'ledger') {
-    alert('サンプル画面：このページは「📒 一覧」のみ実装されています');
+    alert('サンプル画面：このページは「📒 台帳」のみ実装されています');
   }
 }
 

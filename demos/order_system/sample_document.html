@@ -48,17 +48,17 @@ a { color: #174a37; font-weight: 800; }
 <body>
 <main class="paper">
   <div class="label">WEBサンプル書類</div>
-  <h1 id="title">依頼書PDF</h1>
+  <h1 id="title">注文書PDF</h1>
   <p>このページは、PDFリンクのクリック先として用意したサンプル書類です。実際のPDF生成、Drive保存、メール送信は行いません。</p>
   <div class="box">
-  <p><b>依頼ID:</b> <span id="orderId"></span></p>
+  <p><b>注文ID:</b> <span id="orderId"></span></p>
     <p><b>種別:</b> <span id="docType"></span></p>
   </div>
   <p><a href="05_admin.html">管理画面に戻る</a></p>
 </main>
 <script>
 const params = new URLSearchParams(window.location.search);
-const type = params.get('type') === 'delivery' ? '確認書' : '依頼書PDF';
+const type = params.get('type') === 'delivery' ? '納品書' : '注文書PDF';
 document.getElementById('title').textContent = type;
 document.getElementById('docType').textContent = type;
 document.getElementById('orderId').textContent = params.get('id') || 'OP-DEMO';

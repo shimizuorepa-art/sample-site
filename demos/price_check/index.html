@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>商品情報・資料確認補助</title>
+    <title>価格表・帳票確認補助</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="app-shell">
       <header class="topbar">
         <div>
-          <p class="app-name">商品情報・資料確認補助</p>
-          <h1>商品情報・条件・納期マスタの確認ビュー</h1>
+          <p class="app-name">価格表・帳票確認補助</p>
+          <h1>商品・価格・納期マスタの確認ビュー</h1>
         </div>
         <div class="topbar-actions" aria-label="画面切替">
           <button class="nav-button is-active" data-view="search" type="button">
@@ -28,7 +28,7 @@
           </button>
           <button class="nav-button" data-view="story" type="button">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l3-3 3 2 5-7"/></svg>
-            整理提案
+            標準化提案
           </button>
         </div>
       </header>
@@ -37,12 +37,12 @@
         <section class="presentation-note" aria-label="面接での見せ方">
           <div>
             <span>見せ方</span>
-            <strong>商品情報と資料を、同じ基準で確認するための画面</strong>
+            <strong>価格表と帳票を、同じ基準で確認するための画面</strong>
           </div>
-          <p>実務で使った資料をもとに、商品名・条件・数値を差し替えています。正本、差異、承認要否を確認しやすくした例です。</p>
+          <p>実務で使った資料をもとに、商品名・価格・数値を差し替えています。正本、差異、承認要否を確認しやすくした例です。</p>
         </section>
 
-        <section class="summary-strip" aria-label="商品情報サマリー">
+        <section class="summary-strip" aria-label="価格表サマリー">
           <div class="metric">
             <span>整理済み組み合わせ</span>
             <strong id="metricTotal">0</strong>
@@ -75,7 +75,7 @@
                 <input id="keywordInput" type="search" placeholder="品目・型式・管理ID" />
               </label>
               <label>
-                営業チーム
+                営業所
                 <select id="facilityFilter"></select>
               </label>
               <label>
@@ -91,7 +91,7 @@
                 <select id="mealFilter"></select>
               </label>
               <label>
-                条件区分
+                価格帯
                 <input id="priceRange" type="range" min="50000" max="900000" step="10000" value="900000" />
                 <span class="range-value" id="priceRangeLabel">900,000円以下</span>
               </label>
@@ -100,8 +100,8 @@
             <section class="table-panel">
               <div class="section-heading">
                 <div>
-                  <h2>正規化済み商品・商品条件マスタ</h2>
-                  <p>サンプルデータ。商品、仕様、納期、旧版資料との差異を同一画面で確認。</p>
+                  <h2>正規化済み商品・価格マスタ</h2>
+                  <p>サンプルデータ。商品、仕様、納期、旧版帳票との差異を同一画面で確認。</p>
                 </div>
                 <div class="toolbar">
                   <button class="action-button" id="quoteFromSelected" type="button">
@@ -118,12 +118,12 @@
                 <table>
                   <thead>
                     <tr>
-                      <th>営業チーム</th>
+                      <th>営業所</th>
                       <th>管理ID</th>
                       <th>品目</th>
                       <th>詳細</th>
                       <th>型式・仕様</th>
-                      <th>標準条件</th>
+                      <th>標準単価</th>
                       <th>付帯費用</th>
                       <th>合計</th>
                       <th>差異</th>
@@ -147,14 +147,14 @@
                 </button>
               </div>
               <div class="segmented" role="group" aria-label="確認種別">
-                <button class="segment is-active" data-doc-type="quote" type="button">提案確認</button>
-                <button class="segment" data-doc-type="order" type="button">入力受付確認</button>
-                <button class="segment" data-doc-type="delivery" type="button">公開前確認</button>
-                <button class="segment" data-doc-type="invoice" type="button">最終確認</button>
+                <button class="segment is-active" data-doc-type="quote" type="button">見積確認</button>
+                <button class="segment" data-doc-type="order" type="button">受発注確認</button>
+                <button class="segment" data-doc-type="delivery" type="button">納品前確認</button>
+                <button class="segment" data-doc-type="invoice" type="button">請求前確認</button>
               </div>
               <label>
                 宛先
-                <input id="customerName" type="text" value="サンプル製作所株式会社" />
+                <input id="customerName" type="text" value="サンプル商事株式会社" />
               </label>
               <label>
                 数量
@@ -162,11 +162,11 @@
               </label>
               <label>
                 担当部署
-                <input id="ownerInput" type="text" value="営業企画部" />
+                <input id="ownerInput" type="text" value="営業管理部" />
               </label>
               <label>
                 備考
-                <textarea id="noteInput" rows="5">条件は承認済みマスタを参照。実条件・実顧客情報は含まないサンプルです。</textarea>
+                <textarea id="noteInput" rows="5">価格は承認済みマスタを参照。実価格・実顧客情報は含まないサンプルです。</textarea>
               </label>
               <div class="source-box">
                 <h3>参照する社内資料</h3>
@@ -177,7 +177,7 @@
             <section class="preview-panel">
               <div class="section-heading">
                 <div>
-                  <h2 id="documentTitle">提案確認メモ</h2>
+                  <h2 id="documentTitle">見積確認メモ</h2>
                   <p id="documentLead">選択中の商品行と社内ルールを参照して確認項目を整理。</p>
                 </div>
                 <div class="toolbar">
@@ -204,7 +204,7 @@
               </div>
               <label>
                 確認したい内容
-                <textarea id="ragQuery" rows="8">提案や公開前確認で、商品条件マスタと旧版資料に差異がある場合はどう扱う？</textarea>
+                <textarea id="ragQuery" rows="8">見積や納品前確認で、価格マスタと旧版帳票に差異がある場合はどう扱う？</textarea>
               </label>
               <button class="action-button full" id="runRag" type="button">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7v10l8 4 8-4V7l-8-4Z"/><path d="M8 9h8M8 13h5"/></svg>
@@ -215,7 +215,7 @@
               <div class="section-heading">
                 <div>
                   <h2>回答下書き</h2>
-                  <p>社内規定・改定履歴・資料ルールを参照した想定のサンプル。</p>
+                  <p>社内規定・価格履歴・帳票ルールを参照した想定のサンプル。</p>
                 </div>
               </div>
               <div id="ragAnswer" class="rag-answer"></div>
@@ -226,28 +226,28 @@
         <section class="view" id="view-story">
           <div class="story-layout">
             <section class="story-main">
-              <h2>応募補足で伝える整理ストーリー</h2>
+              <h2>応募書類で伝える標準化ストーリー</h2>
               <div class="timeline">
                 <div>
                   <span>Before</span>
-                  <p>チームごとに、商品情報、旧版資料、入力受付、公開・最終確認の探し方が異なっていた。</p>
+                  <p>営業所ごとに、価格表、旧版帳票、受発注、納品・請求前確認の探し方が異なっていた。</p>
                 </div>
                 <div>
                   <span>Action</span>
-                  <p>商品、仕様、条件、納期、確認項目を分け、複雑な組み合わせを検索・照合できる形に整理した。</p>
+                  <p>商品、仕様、価格、納期、確認項目を分け、複雑な組み合わせを検索・照合できる形に整理した。</p>
                 </div>
                 <div>
                   <span>After</span>
-                  <p>営業・運用が同じ基準で提案、入力受付、公開・最終確認を進められる土台を整えた。</p>
+                  <p>営業・事務が同じ基準で見積、受発注、納品・請求前確認を進められる土台を整えた。</p>
                 </div>
               </div>
             </section>
             <aside class="story-side">
               <h3>職務経歴書向け表現</h3>
               <ul>
-                <li>複雑な商品条件を正本、条件、差異、資料確認へ分解</li>
-                <li>営業・運用双方が参照しやすい閲覧用マスタを作成</li>
-                <li>旧版資料との差異確認を組み込み、運用リスクを低減</li>
+                <li>複雑な価格情報を正本、条件、差異、帳票確認へ分解</li>
+                <li>営業・事務双方が参照しやすい閲覧用マスタを作成</li>
+                <li>旧版帳票との差異確認を組み込み、運用リスクを低減</li>
                 <li>確認メモと人の最終判断を分け、確認漏れを減らす提案へ展開</li>
               </ul>
             </aside>
