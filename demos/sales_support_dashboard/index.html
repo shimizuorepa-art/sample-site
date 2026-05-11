@@ -12,7 +12,7 @@
         <div>
           <p class="app-name">営業支援実績ビュー</p>
           <h1>取引先別 実績確認ビュー</h1>
-          <p>営業実績を確認するために作った画面を、提出用に簡素化しています。取引先名・場所名・数値は差し替え済みです。</p>
+          <p>営業実績を確認するために作った画面を、応募補足用に簡素化しています。取引先名・場所名・数値は差し替え済みです。</p>
         </div>
         <span class="data-note">すべてサンプルデータ</span>
       </header>
@@ -27,10 +27,10 @@
 
       <section class="filter-bar" aria-label="表示条件">
         <label>
-          拠点
+          チーム
           <select id="officeFilter">
             <option value="all">すべて</option>
-            <option value="toyohashi">豊橋標準化サンプル</option>
+            <option value="toyohashi">販促整理サンプル</option>
             <option value="tokai">東海エリア</option>
             <option value="west">西日本エリア</option>
           </select>
@@ -43,8 +43,8 @@
           </select>
         </label>
         <div class="segmented" aria-label="指標切替">
-          <button class="segment is-active" data-metric="orders" type="button">受注件数</button>
-          <button class="segment" data-metric="sales" type="button">売上</button>
+          <button class="segment is-active" data-metric="orders" type="button">受付件数</button>
+          <button class="segment" data-metric="sales" type="button">成果</button>
         </div>
         <div class="segmented" aria-label="比較切替">
           <button class="segment is-active" data-compare="previous" type="button">前年比</button>

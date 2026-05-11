@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>事務手順標準化ツール</title>
+    <title>業務手順・販促情報整理ツール</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -13,7 +13,7 @@
           <span class="brand-mark">A</span>
           <div>
             <p>Toyohashi Standard Flow</p>
-            <strong>事務手順標準化ツール</strong>
+            <strong>業務手順・販促情報整理ツール</strong>
           </div>
         </div>
         <nav class="nav" aria-label="ツール切替">
@@ -23,11 +23,11 @@
           </button>
           <button class="nav-item" type="button" data-view="check" aria-pressed="false">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"/><path d="m3 6 1 1 2-3M3 12l1 1 2-3M3 18l1 1 2-3"/></svg>
-            帳票チェック
+            資料チェック
           </button>
           <button class="nav-item" type="button" data-view="manual" aria-pressed="false">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11l3 3v13H5V4Z"/><path d="M16 4v4h4M8 12h8M8 16h8"/></svg>
-            手順書作成
+            FAQ作成
           </button>
           <button class="nav-item" type="button" data-view="knowledge" aria-pressed="false">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7v10l8 4 8-4V7l-8-4Z"/><path d="M8 9h8M8 13h5M12 3v18"/></svg>
@@ -39,16 +39,16 @@
           </button>
         </nav>
         <div class="side-note">
-          <strong>標準化の前提</strong>
-          <p>営業所ごとの依頼や帳票を集め、期限、承認要否、記録形式をそろえる。</p>
+          <strong>整理の前提</strong>
+          <p>チームごとの依頼や資料を集め、期限、承認要否、記録形式をそろえる。</p>
         </div>
       </aside>
 
       <main class="main">
         <header class="topbar">
           <div>
-            <h1>営業所事務の標準化・確認フロー</h1>
-            <p>依頼受付、帳票確認、手順書、進捗管理をまとめた事務作業向けの画面です。入力欄や確認項目は、実際の業務に合わせて変更できます。</p>
+            <h1>販促・営業支援の整理・確認フロー</h1>
+            <p>依頼受付、資料確認、FAQ、進捗管理をまとめた業務向けの画面です。入力欄や確認項目は、実際の業務に合わせて変更できます。</p>
           </div>
           <div class="top-actions">
             <button class="ghost-button" id="seedReset" type="button">
@@ -67,7 +67,7 @@
             <p class="guide-next" id="guideNext"></p>
           </div>
           <div class="guide-support">
-            <span>標準化ポイント</span>
+            <span>整理ポイント</span>
             <ul id="guidePoints"></ul>
           </div>
         </section>
@@ -77,14 +77,14 @@
             <section class="panel work-panel">
               <div class="panel-head">
                 <span class="area-kicker work-kicker">操作エリア</span>
-                <h2>営業所依頼の整理</h2>
+                <h2>営業チーム依頼の整理</h2>
                 <p>依頼内容を受付情報へ整え、初動・確認項目・返信文を作ります。</p>
               </div>
               <div class="form-grid">
                 <label>
                   依頼元
                   <select id="requestFrom">
-                    <option>営業所</option>
+                    <option>営業チーム</option>
                     <option>営業担当</option>
                     <option>経理</option>
                     <option>顧客</option>
@@ -104,24 +104,24 @@
                   <select id="requestImpact">
                     <option value="low">単一案件</option>
                     <option value="medium">複数案件</option>
-                    <option value="high">全社・複数拠点</option>
+                    <option value="high">全社・複数チーム</option>
                   </select>
                 </label>
                 <label>
                   依頼種別
                   <select id="requestType">
-                    <option>価格確認</option>
-                    <option>見積作成</option>
-                    <option>受発注確認</option>
-                    <option>納品前確認</option>
-                    <option>請求確認</option>
+                    <option>条件確認</option>
+                    <option>提案作成</option>
+                    <option>入力受付確認</option>
+                    <option>公開前確認</option>
+                    <option>確認確認</option>
                     <option>手順確認</option>
                   </select>
                 </label>
               </div>
               <label class="full-label">
                 依頼内容
-                <textarea id="requestText" rows="6">営業所から、紙の依頼書とExcel台帳で管理していた価格確認依頼あり。価格改定後の見積金額が旧版帳票と一致しているか、顧客提出前に正しい料金根拠と承認要否を確認したい。</textarea>
+                <textarea id="requestText" rows="6">チームから、紙の依頼書とExcel一覧で管理していた条件確認依頼あり。条件改定後の提案金額が旧版資料と一致しているか、顧客提出前に正しい条件根拠と承認要否を確認したい。</textarea>
               </label>
               <button class="primary-button" id="runTriage" type="button">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-1 7h7l-8 13 1-8H5l8-12Z"/></svg>
@@ -145,16 +145,16 @@
             <section class="panel work-panel">
               <div class="panel-head">
                 <span class="area-kicker work-kicker">操作エリア</span>
-                <h2>帳票確認チェック</h2>
+                <h2>資料確認チェック</h2>
                 <p>正本・最新版・承認者・例外条件を、外部提示や処理の前に確認します。</p>
               </div>
               <label class="full-label">
-                帳票種別
+                資料種別
                 <select id="documentKind">
-                  <option value="quote">見積書</option>
-                  <option value="order">受発注チェック</option>
-                  <option value="delivery">納品前確認</option>
-                  <option value="invoice">請求前確認</option>
+                  <option value="quote">提案書</option>
+                  <option value="order">入力受付チェック</option>
+                  <option value="delivery">公開前確認</option>
+                  <option value="invoice">最終確認</option>
                   <option value="request">社内申請書</option>
                 </select>
               </label>
@@ -166,7 +166,7 @@
                 <h2>チェック判定</h2>
                 <p>未確認項目と差戻し理由を整理します。</p>
               </div>
-              <div class="result-status" id="checkStatus" role="status">表示中: 帳票種別やチェックを変更すると、判定欄が更新されます。</div>
+              <div class="result-status" id="checkStatus" role="status">表示中: 資料種別やチェックを変更すると、判定欄が更新されます。</div>
               <div id="checkResult"></div>
             </section>
           </div>
@@ -177,38 +177,38 @@
             <section class="panel work-panel">
               <div class="panel-head">
                 <span class="area-kicker work-kicker">操作エリア</span>
-                <h2>手順書ドラフトメーカー</h2>
+                <h2>FAQドラフトメーカー</h2>
                 <p>属人的な説明を、標準フォーマットに整えます。</p>
               </div>
               <label class="full-label">
                 業務名
-                <input id="manualTitle" type="text" value="受注受付から納品・請求前確認まで" />
+                <input id="manualTitle" type="text" value="受付受付から公開・最終確認まで" />
               </label>
               <label class="full-label">
                 開始条件
-                <input id="manualTrigger" type="text" value="営業所または営業担当から、受注・納品・請求に関わる確認依頼を受けたとき" />
+                <input id="manualTrigger" type="text" value="営業チームまたは営業担当から、受付・公開・確認に関わる確認依頼を受けたとき" />
               </label>
               <label class="full-label">
                 作業手順
                 <textarea id="manualSteps" rows="7">依頼内容を受付表に記録する
-受注番号・対象商品・数量・納品予定日を確認する
-発注状況、納品・請求前確認条件を確認する
-価格や納期に差異がある場合は承認者へ確認する
+受付番号・対象商品・数量・公開予定日を確認する
+入力状況、公開・最終確認条件を確認する
+条件や納期に差異がある場合は承認者へ確認する
 回答内容と根拠資料を依頼元へ共有する</textarea>
               </label>
               <label class="full-label">
                 例外対応
-                <textarea id="manualException" rows="4">納品日や請求締日に影響する場合は、営業管理部へ優先確認を依頼する。価格根拠や受注登録内容が不明な場合は、暫定回答せず確認中として返信する。</textarea>
+                <textarea id="manualException" rows="4">公開日や確認締日に影響する場合は、営業企画部へ優先確認を依頼する。条件根拠や受付登録内容が不明な場合は、暫定回答せず確認中として返信する。</textarea>
               </label>
               <button class="primary-button" id="buildManual" type="button">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11l3 3v13H5V4Z"/><path d="M8 12h8M8 16h8"/></svg>
-                手順書を整形
+                FAQを整形
               </button>
             </section>
             <section class="panel output-panel result-panel">
               <div class="panel-head">
                 <span class="area-kicker output-kicker">出力エリア</span>
-                <h2>手順書プレビュー</h2>
+                <h2>FAQプレビュー</h2>
                 <p>引き継ぎ・マニュアル化に使うドラフト。</p>
               </div>
               <div class="result-status is-idle" id="manualStatus" role="status"></div>
@@ -222,23 +222,23 @@
             <div class="presentation-copy">
               <span class="area-kicker guide-kicker">案内エリア</span>
               <h2>社内資料を整えると、回答下書きと確認項目をそろえられます</h2>
-              <p>料金表、帳票書式、承認ルール、過去FAQを整理し、必要な資料を参照しながら回答や帳票の下書きを作る想定です。最終判断は必ず担当者が確認します。</p>
+              <p>条件表、資料書式、承認ルール、過去FAQを整理し、必要な資料を参照しながら回答や資料の下書きを作る想定です。最終判断は必ず担当者が確認します。</p>
             </div>
             <div class="concept-grid" aria-label="社内資料参照の流れ">
               <div class="concept-step">
                 <span>1</span>
                 <strong>資料を整える</strong>
-                <p>料金表、帳票書式、取引先情報、FAQ、承認ルールを分けて保管。</p>
+                <p>条件表、資料書式、取引先情報、FAQ、承認ルールを分けて保管。</p>
               </div>
               <div class="concept-step">
                 <span>2</span>
                 <strong>資料を参照する</strong>
-                <p>関連する料金表、帳票ルール、過去FAQだけを探して確認する想定。</p>
+                <p>関連する条件表、資料ルール、過去FAQだけを探して確認する想定。</p>
               </div>
               <div class="concept-step">
                 <span>3</span>
                 <strong>人が確認する</strong>
-                <p>回答文、見積、請求、手順書の下書きを作り、最終判断は担当者が確認。</p>
+                <p>回答文、提案、確認、FAQの下書きを作り、最終判断は担当者が確認。</p>
               </div>
             </div>
           </section>
@@ -252,17 +252,17 @@
               <label class="full-label">
                 用途パターン
                 <select id="knowledgePattern">
-                  <option value="price">価格差異の問い合わせ回答</option>
-                  <option value="quote">見積確認メモの作成補助</option>
-                  <option value="delivery">納品前確認</option>
-                  <option value="invoice">請求前確認の下書き補助</option>
-                  <option value="manual">手順書・FAQ化</option>
+                  <option value="price">条件差異の問い合わせ回答</option>
+                  <option value="quote">提案確認メモの作成補助</option>
+                  <option value="delivery">公開前確認</option>
+                  <option value="invoice">最終確認の下書き補助</option>
+                  <option value="manual">FAQ・FAQ化</option>
                 </select>
               </label>
               <div class="pattern-preview" id="patternPreview"></div>
               <label class="full-label">
                 入力内容
-                <textarea id="knowledgeQuery" rows="7">価格表と見積金額が違うと営業所から連絡がありました。どの資料を根拠に回答すべきですか？</textarea>
+                <textarea id="knowledgeQuery" rows="7">商品情報と提案金額が違うとチームから連絡がありました。どの資料を根拠に回答すべきですか？</textarea>
               </label>
               <button class="primary-button" id="searchKnowledge" type="button">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"/></svg>
@@ -287,7 +287,7 @@
               <div>
                 <span class="area-kicker work-kicker">管理エリア</span>
                 <h2>期限・進捗ボード</h2>
-                <p>事務処理の受付、確認待ち、差戻し、完了を一覧化します。</p>
+                <p>情報整理の受付、確認待ち、差戻し、完了を一覧化します。</p>
               </div>
               <button class="primary-button small" id="addTask" type="button">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
@@ -304,7 +304,7 @@
             <p class="table-hint">横に続く列があります。小さい画面では表を左右に動かして確認できます。</p>
             <div class="table-wrap">
               <table>
-                <caption>事務処理の進捗案件一覧</caption>
+                <caption>情報整理の進捗案件一覧</caption>
                 <thead>
                   <tr>
                     <th>期限</th>

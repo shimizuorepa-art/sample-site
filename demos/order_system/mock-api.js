@@ -22,9 +22,9 @@
   function initialState() {
     const masters = {
       crops: ['商品A', '商品B', '商品C', '商品D', '商品E'],
-      bases: ['サンプル拠点A', 'サンプル拠点B', 'サンプル拠点C'],
+      bases: ['サンプルチームA', 'サンプルチームB', 'サンプルチームC'],
       staff: ['サンプル担当A', 'サンプル担当B', 'サンプル担当C', 'サンプル担当D'],
-      carriers: ['サンプル配送A', 'サンプル配送B', 'サンプル配送C'],
+      carriers: ['サンプル連携A', 'サンプル連携B', 'サンプル連携C'],
       cars: ['軽トラック', 'ハイエース', '2tトラック'],
       clients: ['サンプル会社A', 'サンプル会社B', 'サンプル会社C', 'サンプル会社D'],
       prices: [
@@ -35,11 +35,11 @@
         { crop: '商品E', unitPrice: 35200, note: '大型案件向け' }
       ],
       costs: [
-        { crop: '商品A', unitCost: 110, note: '標準原価' },
-        { crop: '商品B', unitCost: 82, note: '標準原価' },
-        { crop: '商品C', unitCost: 125, note: '高単価プラン' },
-        { crop: '商品D', unitCost: 94, note: '標準原価' },
-        { crop: '商品E', unitCost: 118, note: '大型案件原価' }
+        { crop: '商品A', unitCost: 110, note: '標準コスト' },
+        { crop: '商品B', unitCost: 82, note: '標準コスト' },
+        { crop: '商品C', unitCost: 125, note: '高条件プラン' },
+        { crop: '商品D', unitCost: 94, note: '標準コスト' },
+        { crop: '商品E', unitCost: 118, note: '大型案件コスト' }
       ],
       partners: [
         {
@@ -66,8 +66,8 @@
         submittedBy: 'サンプル会社A',
         clientName: 'サンプル案件A',
         address: 'サンプル県サンプル市中央1-1-1',
-        base: 'サンプル拠点A',
-        client: 'サンプル拠点A_サンプル会社A',
+        base: 'サンプルチームA',
+        client: 'サンプルチームA_サンプル会社A',
         crop: '商品A',
         style: 'レンタル',
         qty: 8,
@@ -77,9 +77,9 @@
         returnDate: '2026-05-10',
         loadTime: '15:00',
         unloadTime: '17:00',
-        loadPlace: 'サンプル拠点A',
+        loadPlace: 'サンプルチームA',
         unloadPlace: 'サンプル案件A 搬入口',
-        carrier: 'サンプル配送A',
+        carrier: 'サンプル連携A',
         car: 'ハイエース',
         staff: 'サンプル担当A',
         rentHandler: 'サンプル担当B',
@@ -114,7 +114,7 @@
         orderFileUrl: '',
         deliveryFileUrl: '',
         deliverySentAt: '',
-        status: '拠点未決定',
+        status: 'チーム未決定',
         note: '雨天時は屋内通路へ移動予定。'
       }),
       makeOrder(masters, {
@@ -122,10 +122,10 @@
         submittedBy: 'サンプル会社A',
         clientName: 'サンプル案件C',
         address: 'サンプル県サンプル市東3-3-3',
-        base: 'サンプル拠点C',
-        client: 'サンプル拠点C_サンプル会社A',
+        base: 'サンプルチームC',
+        client: 'サンプルチームC_サンプル会社A',
         crop: '商品C',
-        style: '納品',
+        style: '公開',
         qty: 12,
         pieces: 180,
         eventDate: '2026-06-02',
@@ -133,9 +133,9 @@
         returnDate: '2026-06-03',
         loadTime: '13:00',
         unloadTime: '16:00',
-        loadPlace: 'サンプル拠点C',
+        loadPlace: 'サンプルチームC',
         unloadPlace: 'サンプル案件C 搬入口',
-        carrier: 'サンプル配送B',
+        carrier: 'サンプル連携B',
         car: '2tトラック',
         staff: 'サンプル担当D',
         rentHandler: 'サンプル担当A',
@@ -150,8 +150,8 @@
         submittedBy: 'サンプル会社C',
         clientName: 'サンプル案件D',
         address: 'サンプル県サンプル市南4-4-4',
-        base: 'サンプル拠点B',
-        client: 'サンプル拠点B_サンプル会社C',
+        base: 'サンプルチームB',
+        client: 'サンプルチームB_サンプル会社C',
         crop: '商品D',
         style: 'レンタル',
         qty: 5,
@@ -161,9 +161,9 @@
         returnDate: '2026-05-26',
         loadTime: '09:00',
         unloadTime: '11:00',
-        loadPlace: 'サンプル拠点B',
+        loadPlace: 'サンプルチームB',
         unloadPlace: 'サンプル案件D 搬入口',
-        carrier: 'サンプル配送A',
+        carrier: 'サンプル連携A',
         car: '軽トラック',
         staff: 'サンプル担当B',
         rentHandler: '',
@@ -233,7 +233,7 @@
       orderFileUrl: '',
       deliveryFileUrl: '',
       deliverySentAt: '',
-      status: input.base ? '有効' : '拠点未決定',
+      status: input.base ? '有効' : 'チーム未決定',
       note: '',
       ...input,
       unitPrice,
@@ -284,11 +284,11 @@
     order.amount = Math.round(order.qty * order.unitPrice);
     order.cost = Math.round(order.pieces * order.unitCost);
     if (!String(order.base || '').trim() && order.status !== 'キャンセル') {
-      order.status = '拠点未決定';
+      order.status = 'チーム未決定';
       order.client = '';
     } else if (!order.client) {
       order.client = order.base + '_サンプル会社A';
-      if (order.status === '拠点未決定') order.status = '有効';
+      if (order.status === 'チーム未決定') order.status = '有効';
     }
     return order;
   }
@@ -300,7 +300,7 @@
         name: 'ローカルサンプルDB',
         id: 'browser-localStorage'
       },
-      '注文DB': {
+      '依頼DB': {
         exists: true,
         lastRow: state.orders.length + 1
       },
@@ -317,7 +317,7 @@
 
   function findOrder(state, orderId) {
     const order = state.orders.find(item => item.id === orderId);
-    if (!order) throw new Error('注文が見つかりません: ' + orderId);
+    if (!order) throw new Error('依頼が見つかりません: ' + orderId);
     return order;
   }
 
@@ -374,7 +374,7 @@
         unloadPlace: payload.unloadPlace,
         note: payload.note,
         orderFileUrl: 'sample_document.html?type=order&id=' + encodeURIComponent(id),
-        status: '拠点未決定'
+        status: 'チーム未決定'
       });
       state.orders.unshift(order);
       saveState(state);
@@ -623,7 +623,7 @@
     nav.innerHTML = `
       <strong>WEBサンプル</strong>
       <a href="00_hub.html">ハブ</a>
-      <a href="04_index.html">発注</a>
+      <a href="04_index.html">入力</a>
       <a href="05_admin.html">管理者</a>
       <a href="06_history.html">履歴</a>
     `;

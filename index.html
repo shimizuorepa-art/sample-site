@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>業務改善サンプルサイト | 清水 洋介</title>
+    <title>AI・Web販促活用サンプルサイト | 清水 洋介</title>
     <style>
       * {
         box-sizing: border-box;
@@ -291,56 +291,6 @@
         margin-top: 16px;
       }
 
-      .mini-flow {
-        margin-top: 14px;
-        padding: 11px 12px;
-        border: 1px solid #cfe7e3;
-        border-radius: 8px;
-        background: #f8fdfa;
-      }
-
-      .mini-flow-title {
-        margin: 0 0 8px;
-        color: var(--teal);
-        font-size: 12px;
-        font-weight: 900;
-      }
-
-      .mini-flow-steps {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      .mini-flow-steps li {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        min-height: 28px;
-        padding: 4px 8px;
-        border: 1px solid #d9e2ee;
-        border-radius: 999px;
-        background: #fff;
-        color: #344054;
-        font-size: 12px;
-        font-weight: 800;
-      }
-
-      .mini-flow-steps span {
-        display: grid;
-        width: 18px;
-        height: 18px;
-        place-items: center;
-        border-radius: 999px;
-        background: #e7f7f4;
-        color: var(--teal);
-        font-size: 10px;
-        font-weight: 900;
-      }
-
       .note {
         padding: 22px;
       }
@@ -405,7 +355,7 @@
       <div class="shell nav">
         <div class="brand">
           <span class="brand-mark">YS</span>
-          <span>業務改善サンプルサイト</span>
+          <span>AI・Web販促活用サンプルサイト</span>
         </div>
         <nav class="nav-links" aria-label="サンプル一覧">
           <a href="#demos">サンプル一覧</a>
@@ -418,10 +368,10 @@
       <section class="hero">
         <div class="shell hero-grid">
           <div class="hero-main">
-            <span class="eyebrow">清水 洋介 / 業務改善サンプル</span>
-            <h1>実務での改善経験をもとに業務画面のサンプルとして整理しました。</h1>
+            <span class="eyebrow">清水 洋介 / AI・Web販促活用サンプル</span>
+            <h1>実務で制作したWEBアプリのサンプルです。</h1>
             <p class="lead">
-              日々の業務管理、受発注、価格確認、営業支援、人員管理などの画面を、社名や数値を差し替えて簡素化しました。業務整理やデジタル活用の一例として見ていただけます。
+              実務で作った画面や資料をもとに、情報整理、検索、見える化、下書き作成の例として簡素化しました。Webコンテンツ改善や販促施策にも転用できる考え方として見ていただけます。
             </p>
           </div>
         </div>
@@ -436,33 +386,23 @@
             </div>
           </div>
           <p class="source-note">
-            事務手順標準化と日々の業務管理は、事務作業や現場報告の負担軽減を想定して作ったサンプルです。他の画面は、実務で作ったものを提出用に加工し、社名・場所名・数値などを差し替えています。
+            WEBアプリのサンプル一覧です。
           </p>
 
           <div class="grid">
             <article class="card">
               <div class="preview">
-                <img src="demos/admin_standardization/screenshot-desktop.png" alt="事務手順標準化サンプルの画面" />
+                <img src="demos/admin_standardization/screenshot-desktop.png" alt="情報整理・回答下書きサンプルの画面" />
               </div>
               <div class="card-body">
-                <div class="card-top"><span class="tag teal">営業所事務</span></div>
-                <h3>事務手順標準化サンプル</h3>
-                <p>依頼受付、帳票確認、手順書、進捗管理をまとめた事務作業向けの画面です。</p>
+                <div class="card-top"><span class="tag teal">AI活用</span></div>
+                <h3>情報整理・回答下書きサンプル</h3>
+                <p>社内資料や問い合わせ内容を整理し、回答や確認事項の下書きにする画面です。</p>
                 <ul class="points">
-                  <li>依頼内容を受付情報として整理</li>
-                  <li>確認項目や入力欄は業務に合わせて変更可能</li>
-                  <li>手順書や引き継ぎにも使える形を想定</li>
+                  <li>複雑な情報を入力しやすい項目へ分解</li>
+                  <li>資料の探し方や確認観点をそろえる</li>
+                  <li>FAQやWebコンテンツ改善にも転用可能</li>
                 </ul>
-                <div class="mini-flow" aria-label="事務手順標準化の整理例">
-                  <p class="mini-flow-title">整理例</p>
-                  <ol class="mini-flow-steps">
-                    <li><span>1</span>受付</li>
-                    <li><span>2</span>確認</li>
-                    <li><span>3</span>記録</li>
-                    <li><span>4</span>共有</li>
-                    <li><span>5</span>手順化</li>
-                  </ol>
-                </div>
                 <div class="card-actions">
                   <a class="button primary" href="demos/admin_standardization/">開く</a>
                 </div>
@@ -471,35 +411,16 @@
 
             <article class="card">
               <div class="preview">
-                <img src="demos/daily_operations_dashboard/screenshot-desktop.png" alt="日々の業務管理システムサンプルの画面" />
+                <img src="demos/price_check/screenshot-desktop.png" alt="商品情報・資料確認サンプルの画面" />
               </div>
               <div class="card-body">
-                <div class="card-top"><span class="tag green">日々の業務管理</span></div>
-                <h3>日々の業務管理システム サンプル</h3>
-                <p>スマホ報告、選択式の計画、分析画面をつなぎ、日々のPDCAを回しやすくする試作画面です。</p>
+                <div class="card-top"><span class="tag">商品情報</span></div>
+                <h3>商品情報・条件整理サンプル</h3>
+                <p>商品情報や条件を一覧化し、探しやすくした例です。</p>
                 <ul class="points">
-                  <li>報告はスマホのアンケート方式で簡単・時短化</li>
-                  <li>計画は選択式で入力負担を軽くする想定</li>
-                  <li>スプレッドシート連携で低コストにテスト運用</li>
-                </ul>
-                <div class="card-actions">
-                  <a class="button primary" href="demos/daily_operations_dashboard/">開く</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="card">
-              <div class="preview">
-                <img src="demos/price_check/screenshot-desktop.png" alt="価格表・帳票確認サンプルの画面" />
-              </div>
-              <div class="card-body">
-                <div class="card-top"><span class="tag">帳票確認</span></div>
-                <h3>価格表・帳票確認サンプル</h3>
-                <p>価格表や帳票の確認を、同じ画面で見られるようにした例です。</p>
-                <ul class="points">
-                  <li>正本マスタ、旧版帳票、差異を確認</li>
-                  <li>見積・受発注・納品前確認に利用</li>
-                  <li>営業と事務が同じ情報を見られる状態に整理</li>
+                  <li>商品・仕様・条件を同じ基準で整理</li>
+                  <li>検索や絞り込みで必要情報に到達</li>
+                  <li>カタログサイトや製品ページ改善に応用可能</li>
                 </ul>
                 <div class="card-actions">
                   <a class="button primary" href="demos/price_check/">開く</a>
@@ -512,13 +433,13 @@
                 <img src="demos/sales_support_dashboard/screenshot-desktop.png" alt="営業支援実績ビューの画面" />
               </div>
               <div class="card-body">
-                <div class="card-top"><span class="tag green">営業支援</span></div>
-                <h3>営業支援実績ビュー</h3>
-                <p>営業担当向けに、取引先別の実績と次アクションを見やすくした画面です。</p>
+                <div class="card-top"><span class="tag green">可視化</span></div>
+                <h3>営業支援・実績可視化サンプル</h3>
+                <p>実績や次アクションを整理し、確認しやすくした画面です。</p>
                 <ul class="points">
-                  <li>取引先別、月別、伸長・減少を確認</li>
+                  <li>取引先別・月別の傾向を可視化</li>
                   <li>商談前に見る情報を一覧化</li>
-                  <li>社名・場所名を差し替えて掲載</li>
+                  <li>展示会後のリード整理にも応用可能</li>
                 </ul>
                 <div class="card-actions">
                   <a class="button primary" href="demos/sales_support_dashboard/">開く</a>
@@ -528,37 +449,56 @@
 
             <article class="card">
               <div class="preview">
-                <img src="demos/order_system/screenshot-desktop.png" alt="受発注システム電子化サンプルの入口画面" />
+                <img src="demos/marketing_activity_dashboard/screenshot-desktop.png" alt="販促・問い合わせ対応ダッシュボードの画面" />
               </div>
               <div class="card-body">
-                <div class="card-top"><span class="tag amber">受発注</span></div>
-                <h3>受発注システム電子化サンプル</h3>
-                <p>実務で作った受発注画面を、提出用に簡素化したものです。</p>
+                <div class="card-top"><span class="tag green">販促分析</span></div>
+                <h3>販促・問い合わせ対応ダッシュボード</h3>
+                <p>Web問い合わせ、資料請求、展示会後フォローを記録し、コンテンツ改善へつなげる試作画面です。</p>
                 <ul class="points">
-                  <li>発注フォーム、管理者画面、注文履歴を用意</li>
-                  <li>Googleスプレッドシート連携を想定</li>
-                  <li>運用確認後に本実装へ引き継ぐ形</li>
+                  <li>流入元・関心テーマ・対応状況を一覧化</li>
+                  <li>FAQや製品ページの改善候補を見える化</li>
+                  <li>スプレッドシート連携で低コストにテスト運用</li>
                 </ul>
                 <div class="card-actions">
-                  <a class="button primary" href="demos/order_system/">開く</a>
-                  <a class="button" href="demos/order_system/05_admin.html">管理者</a>
-                  <a class="button" href="demos/order_system/04_index.html">発注</a>
+                  <a class="button primary" href="demos/marketing_activity_dashboard/">開く</a>
                 </div>
               </div>
             </article>
 
             <article class="card">
               <div class="preview">
-                <img src="demos/foreign_staff_database/screenshot-desktop.png" alt="人員管理台帳サンプルの入口画面" />
+                <img src="demos/order_system/screenshot-desktop.png" alt="入力受付システム電子化サンプルの入口画面" />
               </div>
               <div class="card-body">
-                <div class="card-top"><span class="tag">台帳管理</span></div>
-                <h3>人員管理台帳サンプル</h3>
-                <p>人員管理の台帳画面を、サンプルとして簡素化したものです。</p>
+                <div class="card-top"><span class="tag amber">フォーム設計</span></div>
+                <h3>入力フォーム・管理画面サンプル</h3>
+                <p>問い合わせや依頼受付をフォーム化し、管理画面へつなげる考え方の例です。</p>
                 <ul class="points">
-                  <li>人員情報や確認期限を一覧で確認</li>
+                  <li>入力フォーム、管理者画面、履歴画面を用意</li>
+                  <li>Googleスプレッドシート連携を想定</li>
+                  <li>問い合わせフォームや展示会後フォローに応用可能</li>
+                </ul>
+                <div class="card-actions">
+                  <a class="button primary" href="demos/order_system/">開く</a>
+                  <a class="button" href="demos/order_system/05_admin.html">管理者</a>
+                  <a class="button" href="demos/order_system/04_index.html">フォーム</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="preview">
+                <img src="demos/foreign_staff_database/screenshot-desktop.png" alt="コンテンツ管理一覧サンプルの入口画面" />
+              </div>
+              <div class="card-body">
+                <div class="card-top"><span class="tag">データ整理</span></div>
+                <h3>一覧・検索UIサンプル</h3>
+                <p>多い情報を一覧化し、検索やステータス確認をしやすくした画面です。</p>
+                <ul class="points">
+                  <li>登録情報や確認期限を一覧で確認</li>
                   <li>検索、絞り込み、ステータス確認を用意</li>
-                  <li>氏名や数値はサンプル用に差し替え</li>
+                  <li>製品情報やコンテンツ一覧にも応用可能</li>
                 </ul>
                 <div class="card-actions">
                   <a class="button primary" href="demos/foreign_staff_database/">開く</a>
@@ -574,13 +514,10 @@
           <div class="note">
             <h2>補足</h2>
             <p>
-              画面内の社名、場所名、氏名、価格、数値などは提出用に置き換えています。実顧客情報、実価格、現職の機密情報は含めていません。
+              画面内の社名や数値はサンプル用に差し替えています。実顧客情報や現職の機密情報は含めていません。
             </p>
             <p>
-              最終判断や社外提出に関わる処理は、人による確認・承認を前提にしています。
-            </p>
-            <p>
-              入社後は、商品知識、帳票、社内システム、営業所ごとの実務を学びながら、無理のない改善に取り組みたいと考えています。
+              AIやWebを使った情報整理の例です。Web施策や販促改善に転用できる機会があれば、こうした形で準備できます。
             </p>
           </div>
         </div>

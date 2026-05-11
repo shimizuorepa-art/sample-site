@@ -1,8 +1,8 @@
 const facilities = [
-  { id: "O-A", name: "豊橋営業所", area: "東海" },
-  { id: "O-B", name: "名古屋営業所", area: "東海" },
-  { id: "O-C", name: "関東営業所", area: "関東" },
-  { id: "O-D", name: "九州営業所", area: "九州" },
+  { id: "O-A", name: "東海営業部", area: "東海" },
+  { id: "O-B", name: "名古屋営業チーム", area: "東海" },
+  { id: "O-C", name: "関東営業チーム", area: "関東" },
+  { id: "O-D", name: "九州営業チーム", area: "九州" },
 ];
 
 const activityNames = [
@@ -37,38 +37,38 @@ const meals = [
 const knowledgeBase = [
   {
     id: "KB-01",
-    title: "価格マスタ運用ルール",
+    title: "商品条件マスタ運用ルール",
     body:
-      "顧客提示用の帳票は、承認済み価格マスタを正本として作成する。旧版帳票との差異がある行は、ステータスを要確認にして承認完了まで外部提示しない。",
-    tags: ["価格", "マスタ", "差異", "正本", "承認"],
+      "顧客提示用の資料は、承認済み商品条件マスタを正本として作成する。旧版資料との差異がある行は、ステータスを要確認にして承認完了まで外部提示しない。",
+    tags: ["条件", "マスタ", "差異", "正本", "承認"],
   },
   {
     id: "KB-02",
-    title: "見積確認メモ作成ルール",
+    title: "提案確認メモ作成ルール",
     body:
-      "見積確認メモには管理ID、品目、仕様、数量、税込単価、税込合計、適用条件を記載する。価格の根拠として参照したマスタ更新日を内部メモに残す。",
-    tags: ["見積書", "帳票", "数量", "税込", "根拠"],
+      "提案確認メモには管理ID、品目、仕様、数量、税込条件、税込合計、適用条件を記載する。条件の根拠として参照したマスタ更新日を内部メモに残す。",
+    tags: ["提案書", "資料", "数量", "税込", "根拠"],
   },
   {
     id: "KB-03",
-    title: "受発注確認ルール",
+    title: "入力受付確認ルール",
     body:
-      "受発注確認では、顧客注文内容、社内受注登録、仕入先または工場への発注状況、納期回答が一致していることを確認する。",
-    tags: ["受発注", "発注", "受注", "登録", "履歴"],
+      "入力受付確認では、顧客依頼内容、社内受付登録、仕入先または工場への入力状況、納期回答が一致していることを確認する。",
+    tags: ["入力受付", "入力", "受付", "登録", "履歴"],
   },
   {
     id: "KB-04",
-    title: "納品・請求前確認ルール",
+    title: "公開・最終確認ルール",
     body:
-      "納品前確認では受注登録、納品先、納品予定日または納品完了を確認する。請求前確認では納品完了、請求先、締日、支払条件を確認する。",
-    tags: ["納品", "請求", "確認", "完了", "差分", "備考"],
+      "公開前確認では受付登録、公開先、公開予定日または公開完了を確認する。最終確認では公開完了、確認先、締日、支払条件を確認する。",
+    tags: ["公開", "確認", "確認", "完了", "差分", "備考"],
   },
   {
     id: "KB-05",
-    title: "シェアード化移行メモ",
+    title: "共通運用化移行メモ",
     body:
       "担当者ごとに異なる確認手順は、受付、確認、承認、確認メモ、保管の工程に分ける。共通チェックリストで処理品質をそろえる。",
-    tags: ["シェアード", "手順", "標準化", "チェックリスト"],
+    tags: ["共通運用", "手順", "整理", "チェックリスト"],
   },
 ];
 
@@ -242,22 +242,22 @@ function retrieveSources(query, limit = 3) {
 
 function getDocTypeLabel() {
   return {
-    quote: "見積書",
-    order: "受発注確認",
-    delivery: "納品前確認",
-    invoice: "請求前確認",
+    quote: "提案書",
+    order: "入力受付確認",
+    delivery: "公開前確認",
+    invoice: "最終確認",
   }[state.docType];
 }
 
 function renderDocument() {
   const row = state.selectedRow || state.rows[0];
   const quantity = Math.max(Number(document.getElementById("quantityInput")?.value || 1), 1);
-  const customerName = document.getElementById("customerName")?.value || "サンプル商事株式会社";
-  const owner = document.getElementById("ownerInput")?.value || "営業管理部";
+  const customerName = document.getElementById("customerName")?.value || "サンプル製作所株式会社";
+  const owner = document.getElementById("ownerInput")?.value || "営業企画部";
   const note = document.getElementById("noteInput")?.value || "";
   const docLabel = getDocTypeLabel();
   const subtotal = row.total * quantity;
-  const sources = retrieveSources(`${docLabel} ${row.status} ${note} 価格 マスタ 納品 受注 差異`, 3);
+  const sources = retrieveSources(`${docLabel} ${row.status} ${note} 条件 マスタ 公開 受付 差異`, 3);
 
   document.getElementById("documentTitle").textContent = `${docLabel}メモ`;
   document.getElementById("documentSources").innerHTML = sources
@@ -292,7 +292,7 @@ function renderDocument() {
           <th>項目</th>
           <th>詳細</th>
           <th>数量</th>
-          <th>税込単価</th>
+          <th>税込条件</th>
           <th>税込金額</th>
         </tr>
       </thead>
@@ -308,7 +308,7 @@ function renderDocument() {
     </table>
     <ul class="doc-notes">
       <li>管理ID: ${row.id}</li>
-      <li>価格チェック: ${row.status}${row.diff ? `（旧版帳票との差異 ${formatYen(row.diff)}）` : ""}</li>
+      <li>条件チェック: ${row.status}${row.diff ? `（旧版資料との差異 ${formatYen(row.diff)}）` : ""}</li>
       <li>参照根拠: ${sources.map((source) => source.id).join(" / ")}</li>
       <li>${note}</li>
     </ul>
@@ -332,11 +332,11 @@ function renderRagAnswer() {
   document.getElementById("ragAnswer").innerHTML = `
     <div class="answer-block">
       <h3>回答ドラフト</h3>
-      <p>価格マスタと旧版帳票に差異がある場合は、外部提示前に「要確認」として扱います。確認メモでは承認済みマスタを参照し、承認完了前の行は見積・受発注・納品・請求前確認の対象から外す運用が安全です。</p>
+      <p>商品条件マスタと旧版資料に差異がある場合は、外部提示前に「要確認」として扱います。確認メモでは承認済みマスタを参照し、承認完了前の行は提案・入力受付・公開・最終確認の対象から外す運用が安全です。</p>
       <ul>
         <li>差異行は承認状態が確認できるまで保留。</li>
-        <li>帳票には管理ID、数量、税込単価、税込合計、参照マスタを残す。</li>
-        <li>変更履歴と確認者を残すことで、営業・事務の判断基準をそろえる。</li>
+        <li>資料には管理ID、数量、税込条件、税込合計、参照マスタを残す。</li>
+        <li>変更履歴と確認者を残すことで、営業・運用の判断基準をそろえる。</li>
       </ul>
     </div>
     <div class="answer-block">

@@ -4,7 +4,7 @@
 <base target="_top">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>サンプル受発注ポータル 注文履歴</title>
+<title>サンプル入力受付ポータル 依頼履歴</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap');
 * { box-sizing: border-box; }
@@ -336,8 +336,8 @@ button.secondary {
 <div class="wrap">
   <header class="history-hero">
     <div class="eyebrow">Partner Order History</div>
-    <h1>サンプル受発注ポータル 注文履歴</h1>
-    <p class="hero-copy">過去の注文内容、注文書PDF、納品書を取引先ごとに確認できます。</p>
+    <h1>サンプル入力受付ポータル 依頼履歴</h1>
+    <p class="hero-copy">過去の依頼内容、依頼書PDF、確認書を取引先ごとに確認できます。</p>
   </header>
 
   <!-- ログイン -->
@@ -360,8 +360,8 @@ button.secondary {
     <div class="partner-info" id="partnerInfo"></div>
 
     <div class="summary">
-      <div>総注文件数<b id="sumCount">0</b></div>
-      <div>総売上<b id="sumTotal">¥0</b></div>
+      <div>総依頼件数<b id="sumCount">0</b></div>
+      <div>総成果<b id="sumTotal">¥0</b></div>
     </div>
 
     <div class="history-tools">
@@ -426,15 +426,15 @@ function renderList(){
 
   const box = document.getElementById('listBox');
   if (filtered.length===0) {
-    box.innerHTML = '<div class="empty">該当する注文がありません</div>';
+    box.innerHTML = '<div class="empty">該当する依頼がありません</div>';
     return;
   }
   box.innerHTML = filtered.map(o=>{
     const pdfBtn = o.orderFileUrl
-      ? `<a href="${o.orderFileUrl}" target="_blank">📄 注文書PDF</a>`
+      ? `<a href="${o.orderFileUrl}" target="_blank">📄 依頼書PDF</a>`
       : '<a class="disabled">📄 PDF未発行</a>';
     const delBtn = o.deliveryFileUrl
-      ? `<a class="delivery" href="${o.deliveryFileUrl}" target="_blank">📨 納品書</a>`
+      ? `<a class="delivery" href="${o.deliveryFileUrl}" target="_blank">📨 確認書</a>`
       : '';
     return `
       <div class="order-item">

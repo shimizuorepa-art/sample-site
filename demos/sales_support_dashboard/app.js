@@ -14,7 +14,7 @@ const clients = [
   {
     id: "C-02",
     name: "取引先B",
-    type: "設計事務所",
+    type: "設計運用所",
     office: "tokai",
     owner: "営業担当B",
     base: [18, 24, 31, 29, 44, 52, 40, 36, 28, 33, 39, 45],
@@ -275,7 +275,7 @@ function actionItems(client, previousRate, targetRate) {
     items.push("伸長している月の提案内容を確認し、他案件でも使える確認観点を整理する。");
   }
   if (targetRate < 0) {
-    items.push("目標未達のため、次回訪問時に重点商品、納期、価格条件の確認項目を営業担当へ共有する。");
+    items.push("目標未達のため、次回訪問時に重点商品、納期、提案条件の確認項目を営業担当へ共有する。");
   } else {
     items.push("目標比は順調。継続提案のタイミングと追加商材の候補を営業担当と確認する。");
   }
