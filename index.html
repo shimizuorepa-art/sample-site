@@ -3,287 +3,338 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI・Web販促活用サンプルサイト | 清水 洋介</title>
+    <title>Web App Samples | Y.Shimizu</title>
+    <link rel="stylesheet" href="demos/tokens.css" />
     <style>
-      * {
-        box-sizing: border-box;
-      }
+      /* ── Layout ── */
+      .shell { width: min(1200px, calc(100% - 40px)); margin: 0 auto; }
 
-      :root {
-        --ink: #172033;
-        --muted: #5d6b82;
-        --line: #d9e2ee;
-        --paper: #ffffff;
-        --soft: #f4f7fb;
-        --teal: #0f766e;
-        --blue: #2563eb;
-        --green: #15803d;
-        --amber: #b45309;
+      /* ── Nav ── */
+      .nav-links { display: flex; gap: 6px; }
+      .nav-links a {
+        padding: 7px 14px;
+        border: 1px solid transparent;
+        border-radius: var(--radius);
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.15s;
       }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
+      .nav-links a:hover {
+        border-color: var(--line);
+        background: var(--paper);
         color: var(--ink);
-        background: #edf2f7;
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN",
-          "Yu Gothic", Meiryo, sans-serif;
+      }
+
+      /* ── Hero ── */
+      .hero {
+        position: relative;
+        padding: 72px 0 56px;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse 80% 60% at 70% 20%, rgba(29,78,216,0.06) 0%, transparent 70%),
+          radial-gradient(ellipse 50% 80% at 20% 80%, rgba(99,102,241,0.04) 0%, transparent 70%);
+        pointer-events: none;
+      }
+      .hero-inner {
+        position: relative;
+      }
+      .hero-inner {
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        gap: 32px;
+        align-items: center;
+      }
+      .hero-illustration {
+        width: 100%;
+        max-width: 340px;
+        height: auto;
+        opacity: .82;
+        filter: drop-shadow(0 12px 32px rgba(29,78,216,.10));
+      }
+      .hero-text { max-width: 640px; }
+      .hero-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+        padding: 6px 16px 6px 8px;
+        border-radius: var(--radius-pill);
+        background: var(--paper);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow-soft);
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--muted);
+      }
+      .hero-label-dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: #22c55e;
+        box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
+      }
+      .hero h1 {
+        font-size: clamp(32px, 5vw, 52px);
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        font-weight: 900;
+      }
+      .hero h1 .accent {
+        background: linear-gradient(135deg, #1d4ed8, #6366f1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero-lead {
+        margin-top: 18px;
+        max-width: 560px;
+        color: var(--muted);
+        font-size: 15.5px;
+        line-height: 1.75;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 28px;
+      }
+
+
+      /* ── Method section ── */
+      .method {
+        padding: 48px 0;
+      }
+      .method-header {
+        text-align: center;
+        margin-bottom: 36px;
+      }
+      .method-header h2 {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+      .method-header p {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 15px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.7;
+      }
+      .method-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2px;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        background: var(--line);
+      }
+      .method-step {
+        padding: 28px 22px;
+        background: var(--paper);
+        position: relative;
+      }
+      .method-step:first-child { border-radius: var(--radius-lg) 0 0 var(--radius-lg); }
+      .method-step:last-child { border-radius: 0 var(--radius-lg) var(--radius-lg) 0; }
+      .step-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px; height: 28px;
+        border-radius: 50%;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 13px;
+        font-weight: 800;
+      }
+      .method-step h3 {
+        margin-top: 14px;
+        font-size: 15px;
+        font-weight: 800;
+      }
+      .method-step p {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 13px;
         line-height: 1.65;
       }
 
-      a {
-        color: inherit;
-      }
-
-      .shell {
-        width: min(1180px, calc(100% - 32px));
-        margin: 0 auto;
-      }
-
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        border-bottom: 1px solid rgba(217, 226, 238, 0.9);
-        background: rgba(255, 255, 255, 0.88);
-        backdrop-filter: blur(16px);
-      }
-
-      .nav {
+      /* ── Section header ── */
+      .sec { padding: 24px 0; }
+      .sec-header {
         display: flex;
-        min-height: 62px;
-        align-items: center;
+        align-items: baseline;
         justify-content: space-between;
-        gap: 20px;
+        gap: 16px;
+        margin-bottom: 20px;
       }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 900;
-      }
-
-      .brand-mark {
-        display: grid;
-        width: 34px;
-        height: 34px;
-        place-items: center;
-        border-radius: 8px;
-        background: var(--ink);
-        color: #fff;
-        font-size: 13px;
-      }
-
-      .nav-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        justify-content: flex-end;
-      }
-
-      .nav-links a,
-      .button {
-        display: inline-flex;
-        align-items: center;
-        min-height: 36px;
-        padding: 7px 11px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #fff;
-        color: var(--muted);
-        font-size: 13px;
-        font-weight: 800;
-        text-decoration: none;
-      }
-
-      .button.primary {
-        border-color: var(--teal);
-        background: var(--teal);
-        color: #fff;
-      }
-
-      .hero {
-        padding: 42px 0 28px;
-      }
-
-      .hero-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .hero-main,
-      .card,
-      .note {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--paper);
-        box-shadow: 0 18px 44px rgba(23, 32, 51, 0.07);
-      }
-
-      .hero-main {
-        min-width: 0;
-        padding: clamp(24px, 4vw, 42px);
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        margin-bottom: 14px;
-        padding: 6px 10px;
-        border-radius: 999px;
-        background: #e7f7f4;
-        color: var(--teal);
-        font-size: 12px;
-        font-weight: 900;
-      }
-
-      h1,
-      h2,
-      h3,
-      p {
-        margin: 0;
-      }
-
-      h1 {
-        max-width: 780px;
-        font-size: clamp(30px, 5vw, 52px);
-        line-height: 1.12;
-        letter-spacing: 0;
-        overflow-wrap: anywhere;
-      }
-
-      .lead {
-        max-width: 840px;
-        margin-top: 16px;
-        color: var(--muted);
-        font-size: 15px;
-      }
-
-      section {
-        padding: 18px 0;
-      }
-
-      .section-head {
-        display: flex;
-        align-items: end;
-        justify-content: space-between;
-        gap: 18px;
-        margin-bottom: 14px;
-      }
-
-      .section-head h2 {
+      .sec-header h2 {
         font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
       }
-
-      .section-head p {
-        max-width: 680px;
+      .sec-header p {
         color: var(--muted);
         font-size: 14px;
       }
 
+      /* ── Grid ── */
       .grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 16px;
+        gap: 18px;
       }
 
+      /* ── Card ── */
       .card {
         overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: var(--paper);
+        box-shadow: var(--shadow-soft);
+        transition: box-shadow 0.25s, transform 0.25s;
       }
-
+      .card:hover {
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-3px);
+      }
+      /* ── Card visual header ── */
       .preview {
-        height: 230px;
+        position: relative;
+        height: 200px;
         overflow: hidden;
-        border-bottom: 1px solid var(--line);
-        background: #eef3f8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
-
-      .preview img {
-        display: block;
-        width: 100%;
-        height: 100%;
+      .preview-bg {
+        position: absolute;
+        inset: 0;
+        opacity: 0.9;
+        transition: opacity 0.3s;
+      }
+      .card:hover .preview-bg { opacity: 1; }
+      .preview-icon {
+        position: relative;
+        z-index: 2;
+        width: 56px;
+        height: 56px;
+        color: rgba(255,255,255,0.9);
+        filter: drop-shadow(0 2px 8px rgba(0,0,0,0.12));
+        transition: transform 0.3s;
+      }
+      .card:hover .preview-icon { transform: scale(1.08); }
+      .preview-illust {
+        position: relative;
+        z-index: 2;
+        width: 140px;
+        height: auto;
+        filter: drop-shadow(0 4px 16px rgba(0,0,0,0.12)) brightness(1.08);
+        transition: transform 0.35s;
+      }
+      .card:hover .preview-illust { transform: scale(1.06) translateY(-2px); }
+      .preview-shot {
+        position: absolute;
+        z-index: 3;
+        right: 14px;
+        bottom: 14px;
+        width: 180px;
+        height: auto;
+        border-radius: 8px;
+        border: 2px solid rgba(255,255,255,0.6);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.18);
         object-fit: cover;
         object-position: left top;
+        aspect-ratio: 16/10;
+        transition: transform 0.35s, box-shadow 0.35s;
       }
-
-      .card-body {
-        padding: 18px;
+      .card:hover .preview-shot {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.22);
       }
-
+      /* gradient themes */
+      .grad-ai     { background: linear-gradient(135deg, #4f46e5, #7c3aed, #a78bfa); }
+      .grad-data   { background: linear-gradient(135deg, #1d4ed8, #3b82f6, #60a5fa); }
+      .grad-chart  { background: linear-gradient(135deg, #059669, #10b981, #34d399); }
+      .grad-market { background: linear-gradient(135deg, #0d9488, #14b8a6, #5eead4); }
+      .grad-form   { background: linear-gradient(135deg, #d97706, #f59e0b, #fbbf24); }
+      .grad-list   { background: linear-gradient(135deg, #2563eb, #6366f1, #818cf8); }
+      /* floating shapes */
+      .preview-shape {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.12;
+        pointer-events: none;
+      }
+      .ps1 { width: 120px; height: 120px; background: #fff; top: -30px; left: -20px; }
+      .ps2 { width: 80px; height: 80px; background: #fff; bottom: -20px; right: 40px; }
+      .ps3 { width: 60px; height: 60px; background: #fff; top: 20px; right: -10px; }
+      .card-body { padding: 20px 22px 22px; }
       .card-top {
         display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 12px;
+        align-items: center;
+        gap: 8px;
       }
-
       .tag {
         display: inline-flex;
-        padding: 4px 8px;
-        border-radius: 999px;
-        background: #eff6ff;
-        color: var(--blue);
+        padding: 3px 10px;
+        border-radius: var(--radius-pill);
         font-size: 11px;
-        font-weight: 900;
+        font-weight: 800;
+        letter-spacing: 0.02em;
       }
-
-      .tag.green {
-        background: #ecfdf3;
-        color: var(--green);
+      .tag.blue   { background: var(--accent-soft); color: var(--accent); }
+      .tag.green  { background: #ecfdf5; color: #059669; }
+      .tag.amber  { background: var(--amber-soft);  color: var(--amber); }
+      .tag.teal   { background: #ecfdf5; color: #059669; }
+      .tag.live {
+        background: rgba(34,197,94,0.08);
+        color: #16a34a;
+        border: 1px solid rgba(34,197,94,0.2);
       }
-
-      .tag.amber {
-        background: #fff7ed;
-        color: var(--amber);
-      }
-
-      .tag.teal {
-        background: #e7f7f4;
-        color: var(--teal);
-      }
-
       .card h3 {
         margin-top: 10px;
-        font-size: 22px;
-        line-height: 1.25;
+        font-size: 19px;
+        font-weight: 800;
+        line-height: 1.3;
       }
-
-      .card p {
-        margin-top: 10px;
+      .card-desc {
+        margin-top: 8px;
         color: var(--muted);
-        font-size: 14px;
+        font-size: 13.5px;
+        line-height: 1.65;
       }
-
       .points {
         display: grid;
-        gap: 7px;
+        gap: 5px;
         margin: 14px 0 0;
         padding: 0;
         list-style: none;
       }
-
       .points li {
         position: relative;
-        padding-left: 18px;
-        color: #344054;
-        font-size: 13px;
+        padding-left: 15px;
+        color: #475569;
+        font-size: 12.5px;
+        line-height: 1.55;
       }
-
       .points li::before {
         content: "";
         position: absolute;
-        top: 0.72em;
-        left: 2px;
-        width: 6px;
-        height: 6px;
-        border-radius: 999px;
-        background: var(--teal);
+        top: 0.65em;
+        left: 1px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--accent);
+        opacity: 0.5;
       }
-
       .card-actions {
         display: flex;
         flex-wrap: wrap;
@@ -291,217 +342,343 @@
         margin-top: 16px;
       }
 
-      .note {
-        padding: 22px;
-      }
-
-      .note h2 {
-        font-size: 22px;
-      }
-
-      .note p {
-        margin-top: 10px;
-        color: var(--muted);
-        font-size: 14px;
-      }
-
-      .source-note {
-        margin: 0 0 16px;
-        padding: 16px 18px;
-        border: 1px solid #bbf7d0;
-        border-radius: 8px;
-        background: #f0fdf4;
-        color: #14532d;
-        font-size: 14px;
-      }
-
-      footer {
-        padding: 32px 0 44px;
+      /* ── Buttons ── */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        min-height: 38px;
+        padding: 8px 18px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--paper);
         color: var(--muted);
         font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.15s;
+      }
+      .btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .btn.primary {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: #fff;
+      }
+      .btn.primary:hover {
+        background: var(--accent-hover);
+        border-color: var(--accent-hover);
+      }
+      .btn-sm {
+        min-height: 32px;
+        padding: 5px 12px;
+        font-size: 12px;
+      }
+      .btn-arrow::after {
+        content: "\2192";
+        font-size: 14px;
+        transition: transform 0.15s;
+      }
+      .btn:hover .btn-arrow::after,
+      .btn.primary:hover .btn-arrow::after {
+        transform: translateX(2px);
       }
 
-      @media (max-width: 900px) {
-        .hero-grid,
-        .grid {
-          grid-template-columns: 1fr;
-        }
+      /* ── Note ── */
+      .note-section { padding: 32px 0 20px; }
+      .note-card {
+        padding: 28px 32px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: var(--paper);
+        box-shadow: var(--shadow-soft);
+      }
+      .note-card h2 {
+        font-size: 18px;
+        font-weight: 800;
+      }
+      .note-card p {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.75;
       }
 
-      @media (max-width: 680px) {
-        .nav {
-          align-items: flex-start;
-          flex-direction: column;
-          padding: 12px 0;
-        }
+      /* ── Footer ── */
+      footer {
+        padding: 24px 0 40px;
+        text-align: center;
+        color: var(--subtle);
+        font-size: 12px;
+        letter-spacing: 0.02em;
+      }
 
-        .nav-links {
-          justify-content: flex-start;
-        }
-
-        .preview {
-          height: 190px;
-        }
-
-        h1 {
-          font-size: 28px;
-          word-break: break-all;
-        }
+      /* ── Responsive ── */
+      @media (max-width: 960px) {
+        .hero-inner { grid-template-columns: 1fr; }
+        .method-grid { grid-template-columns: repeat(2, 1fr); }
+        .method-step:first-child { border-radius: var(--radius-lg) 0 0 0; }
+        .method-step:nth-child(2) { border-radius: 0 var(--radius-lg) 0 0; }
+        .method-step:nth-child(3) { border-radius: 0 0 0 var(--radius-lg); }
+        .method-step:last-child { border-radius: 0 0 var(--radius-lg) 0; }
+        .grid { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 640px) {
+        .hero { padding: 48px 0 36px; }
+        .g-nav-inner { flex-direction: column; align-items: flex-start; padding: 12px 0; }
+        .method-grid { grid-template-columns: 1fr; }
+        .method-step:first-child,
+        .method-step:last-child { border-radius: 0; }
+        h1 { font-size: 28px; }
       }
     </style>
   </head>
   <body>
-    <header>
-      <div class="shell nav">
-        <div class="brand">
-          <span class="brand-mark">YS</span>
-          <span>AI・Web販促活用サンプルサイト</span>
-        </div>
-        <nav class="nav-links" aria-label="サンプル一覧">
-          <a href="#demos">サンプル一覧</a>
-          <a href="#notes">補足</a>
+    <!-- ── Nav ── -->
+    <nav class="g-nav">
+      <div class="shell g-nav-inner" style="width:min(1200px,calc(100% - 40px))">
+        <a class="g-brand" href="#">
+          <span class="g-brand-mark">YS</span>
+          <span>Y. Shimizu</span>
+        </a>
+        <nav class="nav-links" aria-label="Page navigation">
+          <a href="#method">Approach</a>
+          <a href="#demos">Samples</a>
+          <a href="#about">About</a>
         </nav>
       </div>
-    </header>
+    </nav>
 
     <main>
+      <!-- ── Hero ── -->
       <section class="hero">
-        <div class="shell hero-grid">
-          <div class="hero-main">
-            <span class="eyebrow">清水 洋介 / AI・Web販促活用サンプル</span>
-            <h1>実務で制作したWEBアプリのサンプルです。</h1>
-            <p class="lead">
-              実務で作った画面や資料をもとに、情報整理、検索、見える化、下書き作成の例として簡素化しました。Webコンテンツ改善や販促施策にも転用できる考え方として見ていただけます。
+        <div class="shell hero-inner">
+          <div class="hero-text">
+            <div class="hero-label">
+              <span class="hero-label-dot"></span>
+              一部は社内で運用中
+            </div>
+            <h1>
+              業務課題を<span class="accent">最小コスト</span>で<br>
+              形にするWebアプリ集
+            </h1>
+            <p class="hero-lead">
+              現場の「これ、なんとかならない？」を聞き取り、スプレッドシートとAIで素早くプロトタイプを制作。
+              テスト運用で業務フローを固めてから、バックエンドエンジニアへ引き継ぐ進め方で作ったサンプルです。
             </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="demos">
-        <div class="shell">
-          <div class="section-head">
-            <div>
-              <h2>サンプル一覧</h2>
-              <p>各カードから個別画面を開けます。</p>
+            <div class="hero-actions">
+              <a class="btn primary btn-arrow" href="#demos"><span>Samples を見る</span></a>
+              <a class="btn" href="#method">進め方について</a>
             </div>
           </div>
-          <p class="source-note">
-            WEBアプリのサンプル一覧です。
-          </p>
+          <img class="hero-illustration" src="hero-illustration.svg" alt="Dashboard illustration" width="340" height="340">
+        </div>
+      </section>
+
+      <!-- ── Method ── -->
+      <section class="method" id="method">
+        <div class="shell">
+          <div class="method-header">
+            <h2>How I Build</h2>
+            <p>「まず小さく動くものを見せる」をベースに、現場検証を経てから本実装へつなぎます。</p>
+          </div>
+          <div class="method-grid">
+            <div class="method-step">
+              <span class="step-num">1</span>
+              <h3>課題の聞き取り</h3>
+              <p>現場担当者と話し、Excel・紙・口頭で回っている業務の流れと困りごとを整理します。</p>
+            </div>
+            <div class="method-step">
+              <span class="step-num">2</span>
+              <h3>AIで高速プロトタイプ</h3>
+              <p>AIでフロント仕様を生成し、Google スプレッドシートをDBに見立てて動く画面を短期間で制作します。</p>
+            </div>
+            <div class="method-step">
+              <span class="step-num">3</span>
+              <h3>現場でテスト運用</h3>
+              <p>実際の業務で使ってもらい、画面の過不足や運用ルールをフィードバックから修正します。</p>
+            </div>
+            <div class="method-step">
+              <span class="step-num">4</span>
+              <h3>エンジニアへ引き継ぎ</h3>
+              <p>業務フローが固まった段階で、仕様・画面・運用知見をバックエンドエンジニアへ渡し本実装に移行します。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Samples ── -->
+      <section class="sec" id="demos">
+        <div class="shell">
+          <div class="sec-header">
+            <div>
+              <h2>Samples</h2>
+              <p>提出用にデータ・デザイン・機能を変更したデモ版です。</p>
+            </div>
+          </div>
 
           <div class="grid">
+            <!-- 1. 業務フロー整理 -->
             <article class="card">
               <div class="preview">
-                <img src="demos/admin_standardization/screenshot-desktop.png" alt="情報整理・回答下書きサンプルの画面" />
+                <div class="preview-bg grad-ai"></div>
+                <div class="preview-shape ps1"></div>
+                <div class="preview-shape ps2"></div>
+                <div class="preview-shape ps3"></div>
+                <img class="preview-illust" src="card-workflow.svg" alt="Workflow illustration">
+                <img class="preview-shot" src="demos/admin_standardization/screenshot-desktop.png" alt="業務フロー整理ツール" />
               </div>
               <div class="card-body">
-                <div class="card-top"><span class="tag teal">AI活用</span></div>
-                <h3>情報整理・回答下書きサンプル</h3>
-                <p>社内資料や問い合わせ内容を整理し、回答や確認事項の下書きにする画面です。</p>
+                <div class="card-top">
+                  <span class="tag blue">AI活用</span>
+                  <span class="tag live">運用中</span>
+                </div>
+                <h3>業務フロー整理ツール</h3>
+                <p class="card-desc">依頼受付・資料チェック・FAQ作成・進捗管理を統合した業務支援画面。</p>
                 <ul class="points">
-                  <li>複雑な情報を入力しやすい項目へ分解</li>
-                  <li>資料の探し方や確認観点をそろえる</li>
-                  <li>FAQやWebコンテンツ改善にも転用可能</li>
+                  <li>複雑な情報を構造化して入力</li>
+                  <li>確認観点と資料参照を標準化</li>
+                  <li>FAQ・コンテンツ改善に転用可能</li>
                 </ul>
                 <div class="card-actions">
-                  <a class="button primary" href="demos/admin_standardization/">開く</a>
+                  <a class="btn primary btn-sm btn-arrow" href="demos/admin_standardization/"><span>Open</span></a>
                 </div>
               </div>
             </article>
 
+            <!-- 2. 商品マスタ -->
             <article class="card">
               <div class="preview">
-                <img src="demos/price_check/screenshot-desktop.png" alt="商品情報・資料確認サンプルの画面" />
+                <div class="preview-bg grad-data"></div>
+                <div class="preview-shape ps1"></div>
+                <div class="preview-shape ps2"></div>
+                <img class="preview-illust" src="card-pricecheck.svg" alt="Data table illustration">
+                <img class="preview-shot" src="demos/price_check/screenshot-desktop.png" alt="商品マスタ確認ビュー" />
               </div>
               <div class="card-body">
-                <div class="card-top"><span class="tag">商品情報</span></div>
-                <h3>商品情報・条件整理サンプル</h3>
-                <p>商品情報や条件を一覧化し、探しやすくした例です。</p>
+                <div class="card-top">
+                  <span class="tag blue">商品情報</span>
+                  <span class="tag live">運用中</span>
+                </div>
+                <h3>商品マスタ確認ビュー</h3>
+                <p class="card-desc">商品・仕様・条件を統一基準で整理し、検索・差異チェックを効率化する画面。</p>
                 <ul class="points">
-                  <li>商品・仕様・条件を同じ基準で整理</li>
-                  <li>検索や絞り込みで必要情報に到達</li>
-                  <li>カタログサイトや製品ページ改善に応用可能</li>
+                  <li>商品名・条件・納期を横断検索</li>
+                  <li>差異・承認要否をハイライト表示</li>
+                  <li>カタログサイト・製品ページに応用可</li>
                 </ul>
                 <div class="card-actions">
-                  <a class="button primary" href="demos/price_check/">開く</a>
+                  <a class="btn primary btn-sm btn-arrow" href="demos/price_check/"><span>Open</span></a>
                 </div>
               </div>
             </article>
 
+            <!-- 3. 営業実績 -->
             <article class="card">
               <div class="preview">
-                <img src="demos/sales_support_dashboard/screenshot-desktop.png" alt="営業支援実績ビューの画面" />
+                <div class="preview-bg grad-chart"></div>
+                <div class="preview-shape ps1"></div>
+                <div class="preview-shape ps3"></div>
+                <img class="preview-illust" src="card-sales.svg" alt="Revenue analysis illustration">
+                <img class="preview-shot" src="demos/sales_support_dashboard/screenshot-desktop.png" alt="営業実績ダッシュボード" />
               </div>
               <div class="card-body">
-                <div class="card-top"><span class="tag green">可視化</span></div>
-                <h3>営業支援・実績可視化サンプル</h3>
-                <p>実績や次アクションを整理し、確認しやすくした画面です。</p>
+                <div class="card-top">
+                  <span class="tag green">可視化</span>
+                </div>
+                <h3>営業実績ダッシュボード</h3>
+                <p class="card-desc">取引先別・月別の実績推移と次アクションを一覧化した営業支援画面。</p>
                 <ul class="points">
-                  <li>取引先別・月別の傾向を可視化</li>
-                  <li>商談前に見る情報を一覧化</li>
-                  <li>展示会後のリード整理にも応用可能</li>
+                  <li>取引先ごとの推移をグラフで把握</li>
+                  <li>商談前の確認情報を集約</li>
+                  <li>展示会後のリード整理にも応用可</li>
                 </ul>
                 <div class="card-actions">
-                  <a class="button primary" href="demos/sales_support_dashboard/">開く</a>
+                  <a class="btn primary btn-sm btn-arrow" href="demos/sales_support_dashboard/"><span>Open</span></a>
                 </div>
               </div>
             </article>
 
+            <!-- 4. 販促活動 -->
             <article class="card">
               <div class="preview">
-                <img src="demos/marketing_activity_dashboard/screenshot-desktop.png" alt="販促・問い合わせ対応ダッシュボードの画面" />
+                <div class="preview-bg grad-market"></div>
+                <div class="preview-shape ps2"></div>
+                <div class="preview-shape ps3"></div>
+                <img class="preview-illust" src="card-marketing.svg" alt="Marketing analysis illustration">
+                <img class="preview-shot" src="demos/marketing_activity_dashboard/screenshot-desktop.png" alt="販促活動ダッシュボード" />
               </div>
               <div class="card-body">
-                <div class="card-top"><span class="tag green">販促分析</span></div>
-                <h3>販促・問い合わせ対応ダッシュボード</h3>
-                <p>Web問い合わせ、資料請求、展示会後フォローを記録し、コンテンツ改善へつなげる試作画面です。</p>
+                <div class="card-top">
+                  <span class="tag green">販促分析</span>
+                </div>
+                <h3>販促活動ダッシュボード</h3>
+                <p class="card-desc">Web問い合わせ・資料請求・展示会フォローを記録し、改善施策へつなげる画面。</p>
                 <ul class="points">
-                  <li>流入元・関心テーマ・対応状況を一覧化</li>
-                  <li>FAQや製品ページの改善候補を見える化</li>
-                  <li>スプレッドシート連携で低コストにテスト運用</li>
+                  <li>流入元・関心テーマ・対応状況を集約</li>
+                  <li>FAQ・製品ページの改善候補を可視化</li>
+                  <li>スプレッドシート連携で低コスト運用</li>
                 </ul>
                 <div class="card-actions">
-                  <a class="button primary" href="demos/marketing_activity_dashboard/">開く</a>
+                  <a class="btn primary btn-sm btn-arrow" href="demos/marketing_activity_dashboard/"><span>Open</span></a>
                 </div>
               </div>
             </article>
 
+            <!-- 5. 受付管理 -->
             <article class="card">
               <div class="preview">
-                <img src="demos/order_system/screenshot-desktop.png" alt="入力受付システム電子化サンプルの入口画面" />
+                <div class="preview-bg grad-form"></div>
+                <div class="preview-shape ps1"></div>
+                <div class="preview-shape ps2"></div>
+                <div class="preview-shape ps3"></div>
+                <img class="preview-illust" src="card-order.svg" alt="Order confirmed illustration">
+                <img class="preview-shot" src="demos/order_system/screenshot-desktop.png" alt="受付管理システム" />
               </div>
               <div class="card-body">
-                <div class="card-top"><span class="tag amber">フォーム設計</span></div>
-                <h3>入力フォーム・管理画面サンプル</h3>
-                <p>問い合わせや依頼受付をフォーム化し、管理画面へつなげる考え方の例です。</p>
+                <div class="card-top">
+                  <span class="tag amber">フォーム設計</span>
+                  <span class="tag live">運用中</span>
+                </div>
+                <h3>受付管理システム</h3>
+                <p class="card-desc">入力フォーム・管理画面・履歴画面の3画面構成で受付業務を電子化。</p>
                 <ul class="points">
-                  <li>入力フォーム、管理者画面、履歴画面を用意</li>
-                  <li>Googleスプレッドシート連携を想定</li>
-                  <li>問い合わせフォームや展示会後フォローに応用可能</li>
+                  <li>入力・管理・履歴を役割別に分離</li>
+                  <li>スプレッドシート連携で段階的に導入</li>
+                  <li>問い合わせフォーム・展示会受付に応用可</li>
                 </ul>
                 <div class="card-actions">
-                  <a class="button primary" href="demos/order_system/">開く</a>
-                  <a class="button" href="demos/order_system/05_admin.html">管理者</a>
-                  <a class="button" href="demos/order_system/04_index.html">フォーム</a>
+                  <a class="btn primary btn-sm btn-arrow" href="demos/order_system/"><span>Open</span></a>
+                  <a class="btn btn-sm" href="demos/order_system/05_admin.html">Admin</a>
+                  <a class="btn btn-sm" href="demos/order_system/04_index.html">Form</a>
                 </div>
               </div>
             </article>
 
+            <!-- 6. データ管理 -->
             <article class="card">
               <div class="preview">
-                <img src="demos/foreign_staff_database/screenshot-desktop.png" alt="コンテンツ管理一覧サンプルの入口画面" />
+                <div class="preview-bg grad-list"></div>
+                <div class="preview-shape ps1"></div>
+                <div class="preview-shape ps3"></div>
+                <img class="preview-illust" src="card-staff.svg" alt="Data points illustration">
+                <img class="preview-shot" src="demos/foreign_staff_database/screenshot-desktop.png" alt="データ管理一覧" />
               </div>
               <div class="card-body">
-                <div class="card-top"><span class="tag">データ整理</span></div>
-                <h3>一覧・検索UIサンプル</h3>
-                <p>多い情報を一覧化し、検索やステータス確認をしやすくした画面です。</p>
+                <div class="card-top">
+                  <span class="tag blue">データ管理</span>
+                </div>
+                <h3>データ管理一覧</h3>
+                <p class="card-desc">登録情報・確認期限・ステータスを検索・絞り込みで管理する一覧画面。</p>
                 <ul class="points">
-                  <li>登録情報や確認期限を一覧で確認</li>
-                  <li>検索、絞り込み、ステータス確認を用意</li>
-                  <li>製品情報やコンテンツ一覧にも応用可能</li>
+                  <li>登録情報を一覧で俯瞰</li>
+                  <li>検索・絞り込み・ステータス管理</li>
+                  <li>製品情報・コンテンツ管理に応用可</li>
                 </ul>
                 <div class="card-actions">
-                  <a class="button primary" href="demos/foreign_staff_database/">開く</a>
+                  <a class="btn primary btn-sm btn-arrow" href="demos/foreign_staff_database/"><span>Open</span></a>
                 </div>
               </div>
             </article>
@@ -509,15 +686,18 @@
         </div>
       </section>
 
-      <section id="notes">
+      <!-- ── About ── -->
+      <section class="note-section" id="about">
         <div class="shell">
-          <div class="note">
-            <h2>補足</h2>
+          <div class="note-card">
+            <h2>About These Samples</h2>
             <p>
-              画面内の社名や数値はサンプル用に差し替えています。実顧客情報や現職の機密情報は含めていません。
+              いずれも実際の業務課題をもとに設計・制作したものです。
+              提出用にデータ・デザイン・一部機能を変更しており、社名・数値はサンプルに置換しています。
             </p>
             <p>
-              AIやWebを使った情報整理の例です。Web施策や販促改善に転用できる機会があれば、こうした形で準備できます。
+              共通しているのは「まず動くものを見せて、現場で検証してから作り込む」という進め方です。
+              スプレッドシート＋AIでプロトタイプを素早く作り、フィードバックを反映したうえでエンジニアへ引き継ぐことで、手戻りの少ない開発を実現しています。
             </p>
           </div>
         </div>
@@ -525,7 +705,7 @@
     </main>
 
     <footer>
-      <div class="shell">清水 洋介 / Business Improvement Sample Site</div>
+      <div class="shell">Y. Shimizu &mdash; Web Application Samples</div>
     </footer>
   </body>
 </html>

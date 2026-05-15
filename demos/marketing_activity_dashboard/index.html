@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>販促・問い合わせ対応ダッシュボード（匿名デモ）</title>
+<title>Marketing Dashboard | Web Application Samples</title>
 <style>
 :root{
-  --ink:#172033;--muted:#667085;--line:#d9e2ee;--paper:#ffffff;
-  --bg:#f5f7fa;--soft:#f8fafc;--teal:#0f766e;--green:#15803d;
-  --blue:#2563eb;--amber:#b45309;--red:#be123c;--teal-soft:#ecfdf3;
-  --shadow:0 14px 34px rgba(16,24,40,.08);
-  --shadow-soft:0 10px 24px rgba(16,24,40,.06);
+  --ink:#1a2332;--muted:#5d6b82;--line:#dce3ed;--paper:#ffffff;
+  --bg:#f1f4f8;--soft:#f8fafb;--teal:#1d4ed8;--green:#15803d;
+  --blue:#1d4ed8;--amber:#b45309;--red:#be123c;--teal-soft:#eff4ff;
+  --shadow:0 4px 24px rgba(23,32,51,.07);
+  --shadow-soft:0 2px 12px rgba(23,32,51,.05);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{
@@ -27,7 +27,7 @@ body{
 .logo{display:flex;align-items:center;gap:10px;}
 .logo-icon{
   width:34px;height:34px;border-radius:8px;display:grid;place-items:center;
-  background:var(--teal-soft);border:1px solid #bde9db;color:var(--teal);
+  background:var(--teal-soft);border:1px solid var(--line);color:var(--teal);
   font-size:16px;font-weight:900;
 }
 .logo-text{font-size:15px;font-weight:900;color:var(--ink);}
@@ -42,23 +42,23 @@ body{
   border-radius:8px;display:flex;align-items:center;justify-content:center;gap:8px;
   color:var(--muted);font-size:13px;font-weight:900;cursor:pointer;transition:.15s;
 }
-.tab:hover{border-color:#bde9db;background:var(--teal-soft);color:var(--teal);}
+.tab:hover{border-color:var(--line);background:var(--teal-soft);color:var(--teal);}
 .tab.active{border-color:var(--teal);background:var(--teal);color:#fff;}
 .badge{padding:2px 7px;border-radius:999px;background:#f1f5f9;color:var(--muted);font-size:10px;font-weight:900;}
 .tab.active .badge{background:rgba(255,255,255,.2);color:#fff;}
 .demo-note{
   display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.42fr);
   gap:16px;align-items:center;margin:18px 28px 0;padding:16px 18px;
-  border:1px solid #bde9db;border-radius:8px;background:#f0fdf8;
+  border:1px solid var(--line);border-radius:8px;background:var(--teal-soft);
   box-shadow:var(--shadow-soft);
 }
 .demo-note-label{display:inline-flex;margin-bottom:6px;color:var(--teal);font-size:12px;font-weight:900;}
 .demo-note h1{font-size:19px;line-height:1.35;letter-spacing:0;}
-.demo-note p{margin-top:6px;color:#245346;font-size:13px;line-height:1.75;}
+.demo-note p{margin-top:6px;color:#2e4a6e;font-size:13px;line-height:1.75;}
 .demo-note-list{display:grid;gap:7px;list-style:none;}
-.demo-note-list li{position:relative;padding-left:16px;color:#245346;font-size:12px;font-weight:800;}
+.demo-note-list li{position:relative;padding-left:16px;color:#2e4a6e;font-size:12px;font-weight:800;}
 .demo-note-list li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:6px;border-radius:999px;background:var(--teal);}
-.demo-caution{grid-column:1/-1;margin:0;padding-top:10px;border-top:1px solid rgba(15,118,110,.14);color:#577067;font-size:11px;}
+.demo-caution{grid-column:1/-1;margin:0;padding-top:10px;border-top:1px solid rgba(29,78,216,.14);color:var(--muted);font-size:11px;}
 .module{display:none;padding-bottom:28px;}
 .module.active{display:block;}
 .sec-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:22px 28px 0;margin-bottom:16px;}
@@ -99,15 +99,15 @@ body{
 .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
 .bar-row:last-child{margin-bottom:0;}
 .bar-lbl{width:92px;text-align:right;flex-shrink:0;color:var(--muted);font-size:11px;}
-.bar-track{height:17px;flex:1;border-radius:5px;background:#edf4ee;overflow:hidden;}
+.bar-track{height:17px;flex:1;border-radius:5px;background:#edf2ff;overflow:hidden;}
 .bar-fill{height:100%;display:flex;align-items:center;padding-left:7px;border-radius:4px;color:#fff;font-size:10px;font-weight:900;}
 .bar-val{width:52px;text-align:right;color:var(--muted);font-size:11px;}
-.mini-note{margin-top:12px;padding:12px;border-radius:8px;background:#f8fbf9;border:1px solid #cfe7e3;color:#3d5f55;font-size:12px;}
+.mini-note{margin-top:12px;padding:12px;border-radius:8px;background:#f5f8ff;border:1px solid #bfdbfe;color:#2e4a6e;font-size:12px;}
 .workflow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
 .workflow li{
   list-style:none;min-height:92px;padding:12px;border:1px solid var(--line);border-radius:8px;background:#fff;
 }
-.workflow span{display:grid;width:24px;height:24px;place-items:center;border-radius:999px;background:#e7f7f4;color:var(--teal);font-size:11px;font-weight:900;}
+.workflow span{display:grid;width:24px;height:24px;place-items:center;border-radius:999px;background:var(--teal-soft);color:var(--teal);font-size:11px;font-weight:900;}
 .workflow strong{display:block;margin-top:8px;font-size:13px;}
 .workflow p{margin-top:4px;color:var(--muted);font-size:11px;}
 .plan-list{display:grid;gap:10px;}
@@ -135,11 +135,11 @@ body{
   <div class="logo">
     <div class="logo-icon">M</div>
     <div>
-      <div class="logo-text">販促・問い合わせ対応ダッシュボード</div>
-      <div class="logo-sub">MARKETING DEMO v1.0</div>
+      <div class="logo-text">販促活動ダッシュボード</div>
+      <div class="logo-sub"><a href="../../" style="color:inherit;text-decoration:none">Back to Top</a></div>
     </div>
   </div>
-  <div class="top-meta">デモデータ — Web・展示会・資料請求</div>
+  <div class="top-meta">Sample Data</div>
 </header>
 
 <nav class="tabs">
@@ -148,21 +148,20 @@ body{
   <div class="tab" onclick="switchModule('plan')">📅 次アクション <span class="badge">PLAN</span></div>
 </nav>
 
-<section class="demo-note" aria-label="このサンプル画面の説明">
+<section class="demo-note" aria-label="概要">
   <div>
-    <span class="demo-note-label">AI・Web販促活用 試作画面</span>
-    <h1>問い合わせ、資料請求、展示会後フォローをつなげ、販促施策を振り返りやすくするサンプルです。</h1>
+    <span class="demo-note-label">Marketing Activity Dashboard</span>
+    <h1>問い合わせ・資料請求・展示会フォローの統合管理画面</h1>
     <p>
-      Webフォームや展示会後の記録を簡単に残し、流入元・関心テーマ・対応状況を分析します。
-      よくある質問や資料ニーズを見える化し、Webページ、FAQ、営業資料の改善につなげる想定です。
+      流入元・関心テーマ・対応状況を記録・分析し、FAQ・製品ページの改善施策へつなげます。
     </p>
   </div>
   <ul class="demo-note-list">
-    <li>マーケティング業務への転用を想定したサンプル画面</li>
-    <li>スプレッドシート連携で低コストなテスト運用から開始</li>
-    <li>入力・集計・次アクション検討の手間を減らすことを重視</li>
+    <li>受付・分析・次アクションを一画面に集約</li>
+    <li>スプレッドシート連携で低コスト運用</li>
+    <li>コンテンツ改善の優先度を可視化</li>
   </ul>
-  <p class="demo-caution">※ サンプル用のダミーデータ使用及び、機能や表示も簡略化しています。</p>
+  <p class="demo-caution">* サンプルデータを使用しています。</p>
 </section>
 
 <div id="mod-record" class="module active">

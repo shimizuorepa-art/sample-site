@@ -1,28 +1,28 @@
 :root {
-  --bg: #f3f6fb;
-  --sidebar: #18212f;
-  --sidebar-soft: #233044;
+  --bg: #f1f4f8;
+  --sidebar: #1a2332;
+  --sidebar-soft: #243044;
   --surface: #ffffff;
-  --surface-soft: #f8fafc;
-  --text: #18202f;
-  --muted: #657083;
-  --line: #d8dfeb;
-  --line-strong: #aab5c6;
-  --blue: #0369a1;
-  --teal: #0f766e;
+  --surface-soft: #f8fafb;
+  --text: #1a2332;
+  --muted: #5d6b82;
+  --line: #dce3ed;
+  --line-strong: #aeb8c8;
+  --blue: #1d4ed8;
+  --teal: #1d4ed8;
   --green: #15803d;
   --amber: #b45309;
   --red: #be123c;
-  --guide-bg: #eef7ff;
+  --guide-bg: #eff4ff;
   --guide-border: #bfdbfe;
-  --guide-accent: #0369a1;
-  --tips-bg: #f8fafc;
+  --guide-accent: #1d4ed8;
+  --tips-bg: #f8fafb;
   --work-head: #ffffff;
   --result-bg: #f8fbff;
-  --result-head: #eff6ff;
+  --result-head: #eff4ff;
   --result-border: #bfdbfe;
-  --shadow: 0 16px 34px rgba(17, 24, 39, 0.08);
-  --shadow-soft: 0 10px 24px rgba(15, 23, 42, 0.06);
+  --shadow: 0 4px 24px rgba(23, 32, 51, 0.07);
+  --shadow-soft: 0 2px 12px rgba(23, 32, 51, 0.05);
 }
 
 * {

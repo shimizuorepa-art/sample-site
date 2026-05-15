@@ -3,19 +3,19 @@
 }
 
 :root {
-  --bg: #f5f7fa;
+  --bg: #f1f4f8;
   --panel: #ffffff;
-  --line: #d7dee8;
-  --text: #172033;
-  --muted: #667085;
-  --blue: #0b73b7;
-  --teal: #0f766e;
+  --line: #dce3ed;
+  --text: #1a2332;
+  --muted: #5d6b82;
+  --blue: #1d4ed8;
+  --teal: #1d4ed8;
   --green: #159947;
   --red: #d04444;
   --soft-green: #dff6e8;
   --soft-red: #fde2e1;
-  --soft-blue: #e7f3fb;
-  --shadow: 0 14px 34px rgba(16, 24, 40, 0.08);
+  --soft-blue: #eff4ff;
+  --shadow: 0 4px 24px rgba(23, 32, 51, 0.07);
 }
 
 body {

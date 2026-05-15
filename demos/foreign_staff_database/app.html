@@ -18,7 +18,7 @@ body{font-family:'Noto Sans JP',system-ui,-apple-system,sans-serif;background:#F
 :root{
   --bg:#F0F5FA;--bg2:#E6EEF8;
   --fg:#334155;--fg2:#475569;--muted:#94A3B8;
-  --primary:#7A92BC;--destructive:#D4183D;
+  --primary:#1d4ed8;--destructive:#D4183D;
   --surface-glass:rgba(255,255,255,0.65);--surface-glass-strong:rgba(255,255,255,0.85);
   --surface-elevated:#FFFFFF;--border:rgba(255,255,255,0.5);
   --border-solid:#E2E4E9;--input:#E2E8F0;
@@ -56,7 +56,7 @@ body{font-family:'Noto Sans JP',system-ui,-apple-system,sans-serif;background:#F
 .header-user{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--fg2)}
 .header-avatar{
   width:32px;height:32px;border-radius:var(--radius-pill);
-  background:linear-gradient(135deg,#BFDBFE,#60A5FA);
+  background:linear-gradient(135deg,#93c5fd,#1d4ed8);
   display:flex;align-items:center;justify-content:center;
   color:#fff;font-size:14px;font-weight:700;
 }
@@ -189,7 +189,7 @@ body{font-family:'Noto Sans JP',system-ui,-apple-system,sans-serif;background:#F
   border-radius:20px;
 }
 .grid-tbody tr:hover{background:rgba(255,255,255,0.75);box-shadow:0 4px 16px rgba(100,116,139,0.16)}
-.grid-tbody tr.selected{background:rgba(122,146,188,0.12);box-shadow:0 0 0 2px rgba(122,146,188,0.35)}
+.grid-tbody tr.selected{background:rgba(29,78,216,0.12);box-shadow:0 0 0 2px rgba(29,78,216,0.35)}
 .grid-tbody td{
   padding:12px 14px;font-size:11px;color:var(--fg);vertical-align:middle;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
@@ -283,10 +283,10 @@ body{font-family:'Noto Sans JP',system-ui,-apple-system,sans-serif;background:#F
 }
 .panel-action-btn.tone-mono:hover{background:rgba(51,65,85,0.16)}
 .panel-action-btn.tone-primary{
-  color:var(--primary);border-color:rgba(122,146,188,0.45);background:rgba(122,146,188,0.18);
+  color:var(--primary);border-color:rgba(29,78,216,0.45);background:rgba(29,78,216,0.18);
 }
-.panel-action-btn.tone-primary:hover{background:rgba(122,146,188,0.28)}
-.panel-action-btn.tone-primary.active{background:rgba(122,146,188,0.26);border-color:rgba(122,146,188,0.6)}
+.panel-action-btn.tone-primary:hover{background:rgba(29,78,216,0.28)}
+.panel-action-btn.tone-primary.active{background:rgba(29,78,216,0.26);border-color:rgba(29,78,216,0.6)}
 .panel-action-btn.tone-mint{
   color:#34D399;border-color:rgba(52,211,153,0.45);background:rgba(52,211,153,0.18);
 }
@@ -338,6 +338,7 @@ body{font-family:'Noto Sans JP',system-ui,-apple-system,sans-serif;background:#F
       <div class="header-logo"><span class="material-icons-outlined">dashboard</span></div>
       <span class="header-title">管理システム</span>
       <span class="header-subtitle">Sample</span>
+      <a href="../../" style="margin-left:16px;font-size:11px;color:#1d4ed8;text-decoration:none;font-weight:600;opacity:.7;transition:opacity .2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.7">← Back to Top</a>
     </div>
     <div class="header-right">
       <div class="header-bell">
